@@ -1,9 +1,9 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 5rem 5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
 }
 
@@ -81,10 +81,11 @@
 }
 
 .card {
-  margin: 1rem;
+  margin: 0.5rem;
   flex-basis: 45%;
+  width: 70vw;
   padding: 1.5rem;
-  text-align: left;
+  text-align: center;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
@@ -95,8 +96,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #0367a6;
+  border-color: #0367a6;
 }
 
 .card h3 {
