@@ -13,12 +13,12 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <nav class="navbar">
         <span className="navbar-item">
-          <Link href="/">
+          <Link href="/" as={ process.env.BACKEND_URL + '/'}>
             <a>TechTrees</a>
           </Link>
         </span>
         <span className="navbar-item">
-          <Link href="/about">
+          <Link href="/about" as={ process.env.BACKEND_URL + '/about'}>
             <a>About</a>
           </Link>
         </span>

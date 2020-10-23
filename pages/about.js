@@ -11,7 +11,7 @@ export default function About() {
       <br />
       budlebeee@gmail.com
       <br />
-      <a href="https://github.com/budlebee/">
+      <a href="https://github.com/budlebee/" as={ "https://github.com/budlebee/" }>
       github repo
       </a>
     </div>
