@@ -1,4 +1,5 @@
 .phone {
+  margin-top: 40px;
   height: 50px;
   width: 100px;
   border: 3px solid white;
@@ -16,8 +17,6 @@
 
 .rotate-alert {
   align-items: center;
-  justify-content: center;
-  display: block;
 }
 
 @keyframes rotate {

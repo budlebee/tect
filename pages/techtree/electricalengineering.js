@@ -2,6 +2,7 @@ import cytoscape from 'cytoscape';
 import React, { useEffect, useRef } from 'react';
 import data from '../../techData/electricalEngineeringTechtree';
 import styles from '../../styles/techtreeStyles';
+import cssStyles from '../../styles/Techtree.module.css';
 
 export default function App() {
   const containerRef = useRef();
@@ -205,8 +206,14 @@ export default function App() {
 
   return (
     <div>
-      <div ref={containerRef} style={{ height: '600px' }} />
-      <div>contributors</div>
+      <div className="rotate-alert">
+        <div className="phone"></div>
+        <div className="message">Please rotate your device!</div>
+      </div>
+      <div className="tree">
+        <div ref={containerRef} style={{ height: '600px' }} />
+        <div>contributors</div>
+      </div>
     </div>
   );
 }
