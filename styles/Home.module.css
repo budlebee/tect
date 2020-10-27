@@ -1,10 +1,13 @@
 .container {
+  margin: 10px;
+  padding-top: 10px;
   min-height: 100vh;
-  padding: 5rem 5rem;
-  display: flex;
-  flex-direction: column;
-  /*justify-content: center;*/
-  align-items: center;
+  display: inline-flex;
+  /*flex-direction: column;*/
+  justify-content: flex-start;
+  /*align-items: center;*/
+  align-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .main {
@@ -80,32 +83,35 @@
   margin-top: 3rem;
 }
 
-.card {
-  margin: 0.5rem;
+.block {
+  margin: 3px;
   flex-basis: 45%;
-  width: 70vw;
-  padding: 1.5rem;
+  width: 100px;
+  height: 100px;
+  padding: 3px;
   text-align: center;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
+  justify-content: center;
+  align-items: center;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
+.block:hover,
+.block:focus,
+.block:active {
   color: #0367a6;
   border-color: #0367a6;
 }
 
-.card h3 {
+.block h3 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
 
-.card p {
+.block p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;

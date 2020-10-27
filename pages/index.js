@@ -11,7 +11,11 @@ export default function App() {
           as={process.env.BACKEND_URL + '/techtree/physics'}
         >
           <a>
-            <div className="card">Physics</div>
+            <div className="block">
+              <img src="../static/icons/physics.svg" height="70" width="70" />
+              <br />
+              Physics
+            </div>
           </a>
         </Link>
 
@@ -20,7 +24,11 @@ export default function App() {
           as={process.env.BACKEND_URL + '/techtree/math'}
         >
           <a>
-            <div className="card">Mathematics</div>
+            <div className="block">
+              <img src="../static/icons/math.svg" height="70" width="70" />
+              <br />
+              Mathematics
+            </div>
           </a>
         </Link>
 
@@ -29,7 +37,13 @@ export default function App() {
           as={process.env.BACKEND_URL + '/techtree/electricalengineering'}
         >
           <a>
-            <div className="card">
+            <div className="block">
+              <img
+                src="../static/icons/electricity.svg"
+                height="50"
+                width="50"
+              />
+              <br />
               Electrical
               <br />
               Engineering
@@ -42,7 +56,11 @@ export default function App() {
           as={process.env.BACKEND_URL + '/techtree/economy'}
         >
           <a>
-            <div className="card">economy</div>
+            <div className="block">
+              <img src="../static/icons/economy.svg" height="70" width="70" />
+              <br />
+              economy
+            </div>
           </a>
         </Link>
       </div>
