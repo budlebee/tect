@@ -4,7 +4,7 @@ export default function About() {
   return (
     <div className="container">
       <div>
-        전공별 테크트리를 모아둔 사이트입니다.
+        테크트리의 경우
         <br />
         꼭 반드시 선수과목을 듣고 후속 과목을 들어야 하는 것은 아닙니다.
         <br />

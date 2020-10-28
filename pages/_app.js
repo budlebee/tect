@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>tect.dev</title>
         <link rel="icon" href="/favicon.ico" />
+
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1"
@@ -17,6 +18,14 @@ function MyApp({ Component, pageProps }) {
         <span className="navbar-item">
           <Link href="/" as={process.env.BACKEND_URL + '/'}>
             <a>TechTrees</a>
+          </Link>
+        </span>
+        <span className="navbar-item">
+          <Link
+            href="/articles/main"
+            as={process.env.BACKEND_URL + '/articles/main'}
+          >
+            <a>Articles</a>
           </Link>
         </span>
         <span className="navbar-item">
