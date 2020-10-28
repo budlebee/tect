@@ -1,9 +1,9 @@
 webpackHotUpdate_N_E("styles",{
 
-/***/ "./styles/Home.module.css":
+/***/ "./styles/Techtree.module.css":
 false,
 
-/***/ 2:
+/***/ 3:
 false
 
 })
