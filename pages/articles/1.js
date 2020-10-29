@@ -5,7 +5,7 @@ export default function Article() {
   <style></style>;
   return (
     <div className="article-container">
-      <p>* Joel Spolsky?</p>
+      <p>* 조엘 스폴스키(Joel Spolsky)?</p>
       <p>
         FogBugz, Trello, Glitch 등 여러 업무 도구를 만든 소프트웨어 회사 Fog
         Creek의 창업자이며 Stack Overflow 의 창업자이자 CEO 였습니다.
@@ -75,8 +75,8 @@ export default function Article() {
       </p>
       <p>
         {' '}
-        제가 말한걸 곧이곧대로 따를만큼 순진한 사람이 아니라면, 8번 항목을
-        추가하세요: 자존심에 대해 전문가의 도움을 구할 것
+        제가 말한걸 곧이곧대로 따를 순진한 사람이 아니라면, 8번 항목을
+        추가하세요: 자존심에 대해 전문적인 도움을 받을 것
       </p>
       <p>
         <h3>1. 졸업하기 전에 글쓰는 법을 배워라.</h3>
@@ -164,7 +164,7 @@ export default function Article() {
             </span>
           </a>
         </Link>{' '}
-        해야합니다. C를 모르고서는 최고의 프래그래밍 작업중 하나인 컴파일러와 OS
+        합니다. C를 모르고서는 최고의 프래그래밍 작업중 하나인 컴파일러와 OS
         관련 일을 결코 할 수 없습니다. 또한 대규모 프로젝트를 위한 아키텍쳐를
         설계하는데 있어 신뢰를 얻을 수 없겠죠. continuations 과 클로져,
         exception handling 에 대해 얼마나 잘 아는지는 중요치 않습니다. 당신이

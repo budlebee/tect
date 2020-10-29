@@ -22,6 +22,8 @@ module.exports = withCSS({
       '/techtree/electricalengineering': {
         page: '/techtree/electricalengineering',
       },
+      '/articles/main': { page: '/articles/main' },
+      '/articles/1': { page: '/articles/1' },
     };
   },
   //assetPrefix: '',

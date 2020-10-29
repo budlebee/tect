@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-export default function About() {
+export default function ArticleMain() {
   return (
     <div className="container">
       <Link href="/articles/1" as={process.env.BACKEND_URL + '/articles/1'}>
