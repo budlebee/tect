@@ -11,10 +11,21 @@ export default function handler(req, res) {
     //res.setHeader('Content-Type', 'application/json');
     //res.send(posts);
     console.log(req.body);
-
+    let userId = 'some-uid';
     fire
       .auth()
       .signInWithEmailAndPassword(req.body.email, req.body.password)
+      .then(() => {
+        admin
+          .auth()
+          .createCustomToken(userId)
+          .then(function (customToken) {
+            // Send token back to client
+          })
+          .catch(function (error) {
+            console.log('Error creating custom token:', error);
+          });
+      })
       .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;

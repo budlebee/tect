@@ -36,7 +36,7 @@ export default function QuestionsMain(props) {
   }
   return (
     <div>
-      {props.uid ? (
+      {user ? (
         <button>
           <Link href="/questions/write">
             <a>글쓰기</a>
@@ -50,8 +50,10 @@ export default function QuestionsMain(props) {
           <div key={element.id}>
             <Link href="/questions/[id]" as={`/questions/` + element.id}>
               <a>
-                <p>{element.title}</p>
-                <p>{element.id}</p>
+                <div>{element.title}</div>
+                <div>{element.id}</div>
+                <div>{element.author.uid}</div>
+                <br />
               </a>
             </Link>
           </div>
@@ -64,16 +66,17 @@ export default function QuestionsMain(props) {
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
-    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    if (cookies) {
+      const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+      const { uid, email } = token;
 
-    const { uid, email } = token;
-
-    return {
-      props: {
-        uid,
-        email,
-      },
-    };
+      return {
+        props: {
+          uid,
+          email,
+        },
+      };
+    }
   } catch (err) {
     console.log(err);
     return {

@@ -2,83 +2,62 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../firebaseConfig';
 import nookies from 'nookies';
 import { firebaseAdmin } from '../../firebaseAdmin';
+import { useAuth } from '../../auth';
 
 const Question = (props) => {
-  const [question, setQuestion] = useState({});
+  const { user } = useAuth();
 
   useEffect(() => {
-    db.collection('questions')
-      .doc(props.questionID)
-      .get()
-      .then(async (doc) => {
-        await setQuestion(doc.data());
-        // await console.log(question);
-      });
-
-    console.log(
-      'props.question: ',
-      props.questionContent,
-      'user uid: ',
-      props.uid,
-      'user email: ',
-      props.email,
-      'props: ',
-      props,
-    );
+    console.log('user: ', user);
+    console.log('props.question: ', props.question);
   }, []);
 
   return (
     <>
-      <div>{question.title}</div>
-      <div>{question.content}</div>
+      <div>{props.question.title}</div>
+      <div>{props.question.content}</div>
+      <div>
+        {props.question.author.uid === props.uid ? (
+          <div>글수정</div>
+        ) : (
+          <div>로그인 해주세요</div>
+        )}
+      </div>
     </>
   );
 };
 
-export async function getServerSideProps({ query, ctx }) {
+export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
-    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-    const { uid, email } = token;
+    let uid = null;
+    if (cookies.token) {
+      const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+      uid = token.uid;
+    }
 
-    const question = {};
+    let question = {};
 
     await db
       .collection('questions')
-      .doc(query.id)
+      .doc(ctx.query.id)
       .get()
       .then((doc) => {
-        question['title'] = doc.data().title;
-        question['content'] = doc.data().content;
+        const docData = JSON.parse(JSON.stringify(doc.data()));
+        question = { id: doc.id, ...docData };
       });
 
     return {
       props: {
-        questionID: query.id,
+        questionID: ctx.query.id,
         uid: uid,
-        questionTitle: question.title,
-        questionContent: question.content,
+        question: question,
       },
     };
   } catch (err) {
-    console.log(err);
-
-    const question = {};
-
-    await db
-      .collection('questions')
-      .doc(query.id)
-      .get()
-      .then((doc) => {
-        question['title'] = doc.data().title;
-        question['content'] = doc.data().content;
-      });
+    console.log('error: ', err);
     return {
-      props: {
-        questionID: query.id,
-        questionTitle: question.title,
-        questionContent: question.content,
-      },
+      props: {},
     };
   }
 }
