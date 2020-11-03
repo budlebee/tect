@@ -29,15 +29,20 @@ function MyApp({ Component, pageProps }) {
           </span>
           <span className="navbar-item">
             <Link
-              href="/articles/main"
-              as={process.env.BACKEND_URL + '/articles/main'}
+              href="/questions/main"
+              as={process.env.BACKEND_URL + '/questions/main'}
             >
-              <a>Articles</a>
+              <a>questions</a>
             </Link>
           </span>
           <span className="navbar-item">
             <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
               <a>About</a>
+            </Link>
+          </span>
+          <span className="navbar-item">
+            <Link href="/login" as={process.env.BACKEND_URL + '/login'}>
+              <a>Login</a>
             </Link>
           </span>
         </nav>

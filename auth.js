@@ -10,16 +10,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     return fire.auth().onIdTokenChanged(async (user) => {
       console.log(`auth changed`);
-      console.log(user ? user.uid : 'no user');
+      console.log(user ? `user uid: ${user.uid}` : 'no user');
       if (!user) {
         setUser(null);
-        nookies.set(undefined, 'noUserToken', '', {});
+        nookies.set(undefined, 'token', '', {});
         return;
       }
       const token = await user.getIdToken();
       setUser(user);
       // TODO: 토큰 이름 암호화 해야함.
-      nookies.set(undefined, 'loginToken', token, { maxAge: 60 * 60 * 24 });
+      nookies.set(undefined, 'token', token, { maxAge: 60 * 60 * 24 });
     });
   }, []);
 
