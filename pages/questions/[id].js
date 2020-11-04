@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { db } from '../../firebaseConfig';
 import nookies from 'nookies';
 import { firebaseAdmin } from '../../firebaseAdmin';
@@ -18,7 +19,26 @@ const Question = (props) => {
       <div>{props.question.content}</div>
       <div>
         {props.question.author.uid === props.uid ? (
-          <div>글수정</div>
+          <>
+            <button>
+              <Link href={`/edit-question/${props.questionID}`}>
+                <a>글수정</a>
+              </Link>
+            </button>
+            <button
+              onClick={() => {
+                db.collection('questions')
+                  .doc(props.questionID)
+                  .delete()
+                  .then(() => {
+                    console.log(`${props.title} have been deleted`);
+                    window.location.href = '/questions/main';
+                  });
+              }}
+            >
+              글삭제
+            </button>
+          </>
         ) : (
           <div>로그인 해주세요</div>
         )}
