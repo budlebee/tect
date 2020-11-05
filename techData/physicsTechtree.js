@@ -91,6 +91,12 @@ const physicsData = [
   },
   {
     data: {
+      id: '입자물리',
+      label: '입자물리',
+    },
+  },
+  {
+    data: {
       id: 'vectorCalculus->linear-algebra',
       source: 'vectorCalculus',
       target: 'linear-algebra',
@@ -227,6 +233,20 @@ const physicsData = [
       id: 'linear-algebra->groupTheory',
       source: 'linear-algebra',
       target: 'groupTheory',
+    },
+  },
+  {
+    data: {
+      id: 'groupTheory->입자물리',
+      source: 'groupTheory',
+      target: '입자물리',
+    },
+  },
+  {
+    data: {
+      id: 'quantumMechanics->입자물리',
+      source: 'quantumMechanics',
+      target: '입자물리',
     },
   },
 ];

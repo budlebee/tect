@@ -59,7 +59,7 @@ export default function App() {
             <div className="block">
               <img src="../static/icons/economy.svg" height="70" width="70" />
               <br />
-              economy
+              economics
             </div>
           </a>
         </Link>
