@@ -15,7 +15,7 @@ const styles = {
 
   dimColor: 'rgb(160,160,160)',
   edgeColor: '#ced6e0',
-  nodeColor: 'rgb(160,160,160)',
+  nodeColor: 'rgb(90,90,120)',
   nodeActiveColor: '#0367A6',
 
   successorColor: '#023859',

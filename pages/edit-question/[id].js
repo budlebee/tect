@@ -40,7 +40,7 @@ const QuestionEdit = (props) => {
             title: title,
             content: content,
           });
-          window.location.href = '/questions/main';
+          window.location.href = `/questions/${props.questionID}`;
           console.log(`${props.questionID} have been updated`);
         }}
       >
