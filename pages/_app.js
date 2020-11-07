@@ -1,24 +1,35 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
   return (
     <>
       <Head>
-      <title>tect.dev</title>
+        <title>tect.dev</title>
         <link rel="icon" href="/favicon.ico" />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
       </Head>
-      <nav class="navbar">
+      <nav className="navbar">
         <span className="navbar-item">
-          <Link href="/" as={ process.env.BACKEND_URL + '/'}>
+          <Link href="/" as={process.env.BACKEND_URL + '/'}>
             <a>TechTrees</a>
           </Link>
         </span>
         <span className="navbar-item">
-          <Link href="/about" as={ process.env.BACKEND_URL + '/about'}>
+          <Link
+            href="/articles/main"
+            as={process.env.BACKEND_URL + '/articles/main'}
+          >
+            <a>Articles</a>
+          </Link>
+        </span>
+        <span className="navbar-item">
+          <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
             <a>About</a>
           </Link>
         </span>
