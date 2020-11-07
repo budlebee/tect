@@ -14,6 +14,7 @@ export default function About() {
         <br />
         budlebeee@team-babel.com
         <br />
+        팀원도 구하고 있어요!<br />
         <a
           href="https://github.com/budlebee/tect"
           as={'https://github.com/budlebee/tect'}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import styles from '../../styles/Article.module.css';
 
 export default function Article() {
   <style></style>;
@@ -24,9 +25,9 @@ export default function Article() {
       <p>
         {' '}
         다행스럽게도, 대부분의 컴퓨터과학과 학생들은 어른에게 어떤 조언도 구하지
-        않을 정도로 뻔뻔합니다. 왜냐면 주변 어른들은 "천공카드 제작자의 수요는
-        1억명을 넘길 것이다", "LISP 프로그래머야 말로 가장 핫한 직업이다" 와
-        같은, 노아의 방주 시절 얘기나 하고 있으니까요.
+        않을 정도로 뻔뻔합니다. 주변 어른들은 "천공카드 제작자의 수요는 1억명을
+        넘길 것이다", "LISP 프로그래머야 말로 가장 핫한 직업이다" 와 같은,
+        노아의 방주 시절 얘기나 하고 있으니까요.
       </p>
       <p>
         {' '}
@@ -392,7 +393,9 @@ export default function Article() {
 
       <p>
         <Link href="https://www.joelonsoftware.com/2005/01/02/advice-for-computer-science-college-students/">
-          <a>출처: Joel Spolsky 블로그</a>
+          <a>
+            <span style={{ color: 'orange' }}>출처: Joel Spolsky 블로그</span>
+          </a>
         </Link>
       </p>
     </div>
