@@ -1,7 +1,7 @@
 import cytoscape from 'cytoscape';
 import React, { useEffect, useRef } from 'react';
 
-import data from '../../techData/physicsTechtree';
+import data from '../../techData/earthSystemTechtree';
 import styles from '../../styles/techtreeStyles';
 import cssStyles from '../../styles/Techtree.module.css';
 
@@ -9,18 +9,15 @@ export default function App() {
   const containerRef = useRef();
 
   useEffect(() => {
-    //const dagre = importDagre()
-    const dagre = require('cytoscape-dagre');
-    cytoscape.use(dagre);
+    const coseBilkent = require('cytoscape-cose-bilkent');
+    cytoscape.use(coseBilkent);
 
     const cy_for_rank = cytoscape({
       elements: data,
     });
-    // rank를 활용하기 위해 data만 입력한 cytoscape 객체입니다
 
     const pageRank = cy_for_rank.elements().pageRank();
     // elements들의 rank들입니다.
-
     const nodeMaxSize = styles.nodeMaxSize;
     const nodeMinSize = styles.nodeMinSize;
     const nodeActiveSize = styles.nodeActiveSize;
@@ -86,7 +83,7 @@ export default function App() {
         },
       ],
       layout: {
-        name: 'dagre',
+        name: 'cose-bilkent',
         animate: false,
         gravityRangeCompound: 1.5,
         fit: true,
@@ -179,10 +176,6 @@ export default function App() {
 
     cy.on('tap', function (e) {
       const url = e.target.data('url');
-      //const label = e.target.data('label');
-      //const modal = document.getElementsByClassName('modal');
-      //modal.style('display', 'block');
-
       if (url && url !== '') {
         window.open(url);
       }
@@ -218,17 +211,8 @@ export default function App() {
       </div>
       <div className="tree">
         <div ref={containerRef} style={{ height: '600px' }} />
-        <div>
-          contributors
-          <br />
-          budlebeee
-        </div>
-      </div>
-      <div
-        className="modal"
-        style={{ display: 'none', zIndex: '1', width: '70%', height: '70%' }}
-      >
-        모달입니다
+        <div>contributors</div>
+        <div>TH.S</div>
       </div>
     </div>
   );

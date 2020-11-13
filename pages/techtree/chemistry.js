@@ -9,8 +9,8 @@ export default function App() {
   const containerRef = useRef();
 
   useEffect(() => {
-    const dagre = require('cytoscape-dagre');
-    cytoscape.use(dagre);
+    const coseBilkent = require('cytoscape-cose-bilkent');
+    cytoscape.use(coseBilkent);
 
     const cy_for_rank = cytoscape({
       elements: data,
@@ -85,7 +85,7 @@ export default function App() {
         },
       ],
       layout: {
-        name: 'dagre',
+        name: 'cose-bilkent',
         animate: false,
         gravityRangeCompound: 1.5,
         fit: true,

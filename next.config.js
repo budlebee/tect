@@ -26,6 +26,7 @@ module.exports = withCSS({
       '/techtree/biochemistry': { page: '/techtree/biochemistry' },
       '/techtree/russia': { page: '/techtree/russia' },
       '/techtree/cs': { page: '/techtree/cs' },
+      '/techtree/earthsystem': { page: '/techtree/earthsystem' },
       '/articles/main': { page: '/articles/main' },
       '/articles/1': { page: '/articles/1' },
     };

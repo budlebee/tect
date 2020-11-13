@@ -114,6 +114,20 @@ export default function App() {
             </div>
           </a>
         </Link>
+        <Link
+          href="/techtree/earthsystem"
+          as={process.env.BACKEND_URL + '/techtree/earthsystem'}
+        >
+          <a>
+            <div className="block">
+              <img src="../static/icons/earth.svg" height="50" width="50" />
+              <br />
+              Earth
+              <br />
+              System
+            </div>
+          </a>
+        </Link>
       </div>
     </>
   );

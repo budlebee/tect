@@ -1,8 +1,23 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 import Link from 'next/link';
+import Router from 'next/router';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+import * as gtag from '../lib/gtag';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <>
       <Head>
@@ -13,6 +28,17 @@ function MyApp({ Component, pageProps }) {
           name="viewport"
           content="width=device-width, initial-scale=1"
         ></meta>
+        <meta
+          name="description"
+          content="세상 모든 지식의 테크트리, tect.dev"
+        ></meta>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="tect.dev" />
+        <meta
+          property="og:description"
+          content="세상 모든 지식의 테크트리, tect.dev"
+        />
+        <meta property="og:url" content="https://tect.dev"></meta>
       </Head>
       <nav className="navbar">
         <span className="navbar-item">
