@@ -34,3 +34,5 @@ yarn-error.log*
 
 .eslinrc.json
 .prettierrc
+
+/lib/gtag.js
