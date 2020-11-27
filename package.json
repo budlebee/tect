@@ -8,11 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-less": "^1.0.1",
     "antd": "^4.8.6",
-    "beautiful-skill-tree": "^1.7.1",
+    "cytoscape": "^3.17.0",
+    "cytoscape-dagre": "^2.3.1",
+    "less": "^3.12.2",
     "next": "9.5.5",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sass": "^1.29.0"
   },
   "eslintConfig": {
     "extends": [
