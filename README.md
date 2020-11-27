@@ -14,3 +14,15 @@ https://tect.dev
 ## Nextjs
 
 웬만한 내용은 Nextjs 홈페이지에 잘 정리가 되어있다. (https://nextjs.org/)
+
+
+
+## 추가
+
+##  ant design next js에 적용시키기
+    [출처] (https://dev.to/burhanuday/using-ant-design-with-nextjs-custom-variables-for-ant-design-57m5)
+
+1.  npm i antd
+2.  styles/antd.less 파일 생성 후 원하는 코드 입력
+3.  npm install --save @zeit/next-css @zeit/next-less @zeit/next-sass babel-plugin-import less 실행
+4.  next.config.js 파일 생성 후 출처 내용 복붙
