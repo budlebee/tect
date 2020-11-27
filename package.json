@@ -8,8 +8,30 @@
     "start": "next start"
   },
   "dependencies": {
+    "antd": "^4.8.6",
+    "beautiful-skill-tree": "^1.7.1",
     "next": "9.5.5",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+      "react/jsx-filename-extension": 0,
+      "no-conlose": 0
+    },
+    "env": {
+      "browser": true
+    }
+  },
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.2.0"
   }
 }
