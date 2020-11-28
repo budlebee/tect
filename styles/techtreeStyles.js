@@ -15,12 +15,12 @@ const styles = {
 
   dimColor: 'rgb(160,160,160)',
   edgeColor: '#ced6e0',
-  nodeColor: 'rgb(160,160,160)',
+  nodeColor: 'rgb(60,60,60)',
   nodeActiveColor: '#0367A6',
 
   successorColor: '#023859',
   // 상위 node & edge color
-  predecessorsColor: '#66A8D1',
+  predecessorsColor: '#00A8D1',
   // 하위 node & edge color},
 };
 export default styles;

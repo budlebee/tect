@@ -1,14 +1,36 @@
-import Head from 'next/head';
-import { Row, Col } from 'antd';
+import '../styles/Home.module.css';
+import Link from 'next/link';
 import cytoscape from 'cytoscape';
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
-
 import data from '../techData/physicsTechtree';
 import styles from '../styles/techtreeStyles';
+import '../styles/Techtree.module.css';
 
-export default function Home() {
+export default function App() {
   const containerRef = useRef();
+
+  const SubjectBlock = ({ subjectName, iconSize, displayName }) => {
+    return (
+      <>
+        <Link
+          href={`/techtree/${subjectName}`}
+          as={process.env.BACKEND_URL + `/techtree/${subjectName}`}
+        >
+          <a>
+            <div className="block">
+              <img
+                src={`../statics/icons/${subjectName}.svg`}
+                height={iconSize}
+                width={iconSize}
+              />
+              <br />
+              {displayName}
+            </div>
+          </a>
+        </Link>
+      </>
+    );
+  };
 
   useEffect(() => {
     const dagre = require('cytoscape-dagre');
@@ -210,15 +232,15 @@ export default function Home() {
       setResetFocus(e.cy);
     });
   }, []);
-  return (
-    <div>
-      <Head>
-        <title>세상 모든 테크트리, tect.dev</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <Row gutter={8}>
-        <Col className="gutter-row" span={18}>
+  return (
+    <>
+      <div className="rotate-alert">
+        <div className="phone"></div>
+        <div className="message">Please rotate your device!</div>
+      </div>
+      <div className="container">
+        <main>
           <div className="tree">
             <div ref={containerRef} style={{ height: '600px' }} />
             <div>
@@ -227,14 +249,19 @@ export default function Home() {
               budlebeee
             </div>
           </div>
-        </Col>
-        <Col className="gutter-row" span={6}>
+        </main>
+        <aside className="sidebar">
+          <SubjectBlock
+            subjectName={'physics'}
+            iconSize={'70'}
+            displayName={'Physics'}
+          />
           <Link
             href="/techtree/physics"
             as={process.env.BACKEND_URL + '/techtree/physics'}
           >
             <a>
-              <div>
+              <div className="block">
                 <img
                   src="../statics/icons/physics.svg"
                   height="70"
@@ -245,10 +272,133 @@ export default function Home() {
               </div>
             </a>
           </Link>
-        </Col>
-      </Row>
 
-      <footer></footer>
-    </div>
+          <Link
+            href="/techtree/math"
+            as={process.env.BACKEND_URL + '/techtree/math'}
+          >
+            <a>
+              <div className="block">
+                <img src="../static/icons/math.svg" height="70" width="70" />
+                <br />
+                Mathematics
+              </div>
+            </a>
+          </Link>
+
+          <Link
+            href="/techtree/electricalengineering"
+            as={process.env.BACKEND_URL + '/techtree/electricalengineering'}
+          >
+            <a>
+              <div className="block">
+                <img
+                  src="../static/icons/electricity.svg"
+                  height="50"
+                  width="50"
+                />
+                <br />
+                Electrical
+                <br />
+                Engineering
+              </div>
+            </a>
+          </Link>
+
+          <Link
+            href="/techtree/economy"
+            as={process.env.BACKEND_URL + '/techtree/economy'}
+          >
+            <a>
+              <div className="block">
+                <img
+                  src="../static/icons/economics.svg"
+                  height="70"
+                  width="70"
+                />
+                <br />
+                Economics
+              </div>
+            </a>
+          </Link>
+          <Link
+            href="/techtree/chemistry"
+            as={process.env.BACKEND_URL + '/techtree/chemistry'}
+          >
+            <a>
+              <div className="block">
+                <img
+                  src="../static/icons/chemistry.svg"
+                  height="70"
+                  width="70"
+                />
+                <br />
+                Chemistry
+              </div>
+            </a>
+          </Link>
+          <Link
+            href="/techtree/biochemistry"
+            as={process.env.BACKEND_URL + '/techtree/biochemistry'}
+          >
+            <a>
+              <div className="block">
+                <img
+                  src="../static/icons/biochemistry.svg"
+                  height="70"
+                  width="70"
+                />
+                <br />
+                Biochemistry
+              </div>
+            </a>
+          </Link>
+          <Link
+            href="/techtree/russia"
+            as={process.env.BACKEND_URL + '/techtree/russia'}
+          >
+            <a>
+              <div className="block">
+                <img src="../static/icons/russia.svg" height="70" width="70" />
+                <br />
+                Russia
+              </div>
+            </a>
+          </Link>
+          <Link
+            href="/techtree/cs"
+            as={process.env.BACKEND_URL + '/techtree/cs'}
+          >
+            <a>
+              <div className="block">
+                <img
+                  src="../static/icons/computer.svg"
+                  height="50"
+                  width="50"
+                />
+                <br />
+                Computer
+                <br />
+                Science
+              </div>
+            </a>
+          </Link>
+          <Link
+            href="/techtree/earthsystem"
+            as={process.env.BACKEND_URL + '/techtree/earthsystem'}
+          >
+            <a>
+              <div className="block">
+                <img src="../static/icons/earth.svg" height="50" width="50" />
+                <br />
+                Earth
+                <br />
+                System
+              </div>
+            </a>
+          </Link>
+        </aside>
+      </div>
+    </>
   );
 }

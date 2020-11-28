@@ -1,10 +1,30 @@
 .container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 'main main aside';
+}
+header {
+  grid-area: header;
+}
+main {
+  grid-area: main;
+}
+aside {
+  grid-area: aside;
+  min-width: 230px;
+}
+footer {
+  grid-area: footer;
+}
+
+.sidebar {
+  display: inline-flex;
+  /*flex-direction: column;*/
+  justify-content: flex-start;
+  /*align-items: center;*/
+  align-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .main {
@@ -80,31 +100,35 @@
   margin-top: 3rem;
 }
 
-.card {
-  margin: 1rem;
+.block {
+  margin: 3px;
   flex-basis: 45%;
-  padding: 1.5rem;
-  text-align: left;
+  width: 100px;
+  height: 100px;
+  padding: 3px;
+  text-align: center;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
+  justify-content: center;
+  align-items: center;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.block:hover,
+.block:focus,
+.block:active {
+  color: #0367a6;
+  border-color: #0367a6;
 }
 
-.card h3 {
+.block h3 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
 
-.card p {
+.block p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
@@ -118,5 +142,54 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+}
+
+.phone {
+  margin-top: 40px;
+  height: 50px;
+  width: 100px;
+  border: 3px solid #000000;
+  border-radius: 10px;
+  animation: rotate 1.5s ease-in-out infinite alternate;
+  /* display: none; */
+}
+.message {
+  font-size: 1em;
+  margin-top: 40px;
+  color: #000000;
+  /* display: none; */
+}
+
+.rotate-alert {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@media (max-width: 400px) {
+  .tree {
+    display: none;
+  }
+}
+
+@media (min-width: 400px) {
+  .rotate-alert {
+    display: none;
   }
 }
