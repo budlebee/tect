@@ -2,43 +2,43 @@ const csData = [
   {
     data: {
       id: '선형대수',
-      label: '선형대수',
+      label: 'Linear Algebra',
     },
   },
   {
     data: {
       id: '공학수학',
-      label: '공학수학',
+      label: 'Math Fundamentals',
     },
   },
   {
     data: {
       id: '확률과통계',
-      label: '확률과통계',
+      label: 'Probability and Statistics',
     },
   },
   {
     data: {
       id: '컴퓨터그래픽스',
-      label: '컴퓨터그래픽스',
+      label: 'Computer Graphics',
     },
   },
   {
     data: {
       id: '이산수학',
-      label: '이산수학',
+      label: 'Discrete Math',
     },
   },
   {
     data: {
       id: '자료구조',
-      label: '자료구조',
+      label: 'Data Structure',
     },
   },
   {
     data: {
       id: '객체지향프로그래밍',
-      label: '객체지향프로그래밍',
+      label: 'OOP',
     },
   },
   {
@@ -56,13 +56,13 @@ const csData = [
   {
     data: {
       id: '컴파일러',
-      label: '컴파일러',
+      label: 'Compliler',
     },
   },
   {
     data: {
       id: '오토마타',
-      label: '오토마타',
+      label: 'Automata',
     },
   },
   {
@@ -74,7 +74,7 @@ const csData = [
   {
     data: {
       id: '알고리즘',
-      label: '알고리즘',
+      label: 'Algorithm',
     },
   },
   {
@@ -86,31 +86,31 @@ const csData = [
   {
     data: {
       id: '인공지능',
-      label: '인공지능',
+      label: 'AI',
     },
   },
   {
     data: {
       id: '머신러닝',
-      label: '머신러닝',
+      label: 'Machine Learning',
     },
   },
   {
     data: {
       id: '데이터마이닝',
-      label: '데이터마이닝',
+      label: 'Data Mining',
     },
   },
   {
     data: {
       id: '데이터베이스',
-      label: '데이터베이스',
+      label: 'DB',
     },
   },
   {
     data: {
       id: '컴퓨터네트워크',
-      label: '컴퓨터네트워크',
+      label: 'Network',
     },
   },
   {
@@ -134,13 +134,13 @@ const csData = [
   {
     data: {
       id: '컴퓨터아키텍쳐',
-      label: '컴퓨터아키텍쳐',
+      label: 'Architecture',
     },
   },
   {
     data: {
       id: '운영체제',
-      label: '운영체제',
+      label: 'OS',
     },
   },
   {
@@ -159,7 +159,7 @@ const csData = [
   {
     data: {
       id: '컴퓨터비전',
-      label: '컴퓨터비전',
+      label: 'Computer Vision',
     },
   },
   {

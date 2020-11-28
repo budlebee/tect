@@ -2,139 +2,139 @@ const mathData = [
   {
     data: {
       id: 'vectorCalculus',
-      label: '벡터 미적분학',
+      label: 'Vector Calculus',
     },
   },
   {
     data: {
       id: 'linearAlgebra',
-      label: '선형대수',
+      label: 'Linear Algebra',
     },
   },
   {
     data: {
       id: 'numberTheory',
-      label: '정수론',
+      label: 'Number Theory',
     },
   },
   {
     data: {
       id: 'setTheory',
-      label: '집합론',
+      label: 'Set Theory',
     },
   },
   {
     data: {
       id: 'analysis',
-      label: '해석학',
+      label: 'Analysis',
     },
   },
   {
     data: {
       id: 'discreteMathematics',
-      label: '이산수학',
+      label: 'Discrete Mathematics',
     },
   },
   {
     data: {
       id: 'ode',
-      label: '상미분방정식',
+      label: 'ODE',
     },
   },
   {
     data: {
       id: 'pde',
-      label: '편미분방정식',
+      label: 'PDE',
     },
   },
   {
     data: {
       id: 'probability',
-      label: '확률론',
+      label: 'Probability',
     },
   },
   {
     data: {
       id: 'differentialGeometry',
-      label: '미분기하',
+      label: 'Differential Geometry',
     },
   },
   {
     data: {
       id: 'modernAlgebra',
-      label: '현대대수',
+      label: 'Modern Algebra',
     },
   },
   {
     data: {
       id: 'numericalAnalysis',
-      label: '수치해석',
+      label: 'Numerical Analysis',
     },
   },
   {
     data: {
       id: 'topology',
-      label: '위상수학',
+      label: 'Topology',
     },
   },
   {
     data: {
       id: 'fieldTheory',
-      label: '체론',
+      label: 'Field Theory',
     },
   },
   {
     data: {
       id: 'financialMathematics',
-      label: '금융수학',
+      label: 'Financial Mathematics',
     },
   },
   {
     data: {
       id: 'algebraicGeometry',
-      label: '대수기하',
+      label: 'Algebraic Geometry',
     },
   },
   {
     data: {
       id: 'fourierAnalysis',
-      label: '푸리에해석',
+      label: 'Fourier Analysis',
     },
   },
   {
     data: {
       id: 'statistics',
-      label: '통계학',
+      label: 'Statistics',
     },
   },
   {
     data: {
       id: 'complexAnalysis',
-      label: '복소해석',
+      label: 'Complex Analysis',
     },
   },
   {
     data: {
       id: 'mathematicalLogic',
-      label: '수리논리',
+      label: 'Mathematical Logic',
     },
   },
   {
     data: {
       id: 'combinatorics',
-      label: '조합론',
+      label: 'Combinatorics',
     },
   },
   {
     data: {
       id: 'appliedAlgebra',
-      label: '응용대수',
+      label: 'Applied Algebra',
     },
   },
   {
     data: {
       id: 'probabilityAndRandomProcesses',
-      label: '확률과정론',
+      label: 'Random Processes',
     },
   },
   {

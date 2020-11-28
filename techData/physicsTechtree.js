@@ -2,97 +2,97 @@ const physicsData = [
   {
     data: {
       id: 'vectorCalculus',
-      label: '벡터미적분학',
+      label: 'Vector Calculus',
     },
   },
   {
     data: {
       id: 'linear-algebra',
-      label: '선형대수',
+      label: 'Linear Algebra',
     },
   },
   {
     data: {
       id: 'diffrential-equation',
-      label: '미분방정식',
+      label: 'Differntial Equation (고등미적분학)',
     },
   },
   {
     data: {
       id: 'relativity',
-      label: '상대성이론',
+      label: 'Relativity (상대성이론)',
     },
   },
   {
     data: {
       id: 'groupTheory',
-      label: '군론',
+      label: 'Group Theory (군론)',
     },
   },
   {
     data: {
       id: 'nuclearPhysics',
-      label: '핵물리학',
+      label: 'Nuclear Physics',
     },
   },
   {
     data: {
       id: 'optics',
-      label: '광학',
+      label: 'Optics',
     },
   },
   {
     data: {
       id: 'solidStatePhysics',
-      label: '고체물리학',
+      label: 'Solid State Physics',
     },
   },
   {
     data: {
       id: 'classicalMechanics',
-      label: '고전역학',
+      label: 'Classical Mechanics',
     },
   },
   {
     data: {
       id: 'electroDynamics',
-      label: '전자기학',
+      label: 'Electrodynamics',
     },
   },
   {
     data: {
       id: 'quantumMechanics',
-      label: '양자역학',
+      label: 'Quantum Mechanics',
     },
   },
   {
     data: {
       id: 'thermalPhysics',
-      label: '열물리',
+      label: 'Theraml Physics',
     },
   },
   {
     data: {
       id: 'statisticalPhysics',
-      label: '통계물리',
+      label: 'Statistical Physics',
     },
   },
   {
     data: {
       id: 'modernPhysics',
-      label: '현대물리',
+      label: 'Concepts of Modern Physics',
     },
   },
   {
     data: {
       id: 'circuit',
-      label: '회로이론',
+      label: 'Electronics',
     },
   },
   {
     data: {
       id: '입자물리',
-      label: '입자물리',
+      label: 'Particle Physics',
     },
   },
   {

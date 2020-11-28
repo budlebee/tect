@@ -224,12 +224,6 @@ export default function App() {
           budlebeee
         </div>
       </div>
-      <div
-        className="modal"
-        style={{ display: 'none', zIndex: '1', width: '70%', height: '70%' }}
-      >
-        모달입니다
-      </div>
     </div>
   );
 }

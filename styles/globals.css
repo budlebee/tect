@@ -6,13 +6,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a1919;
-    color: rgb(212, 212, 212);
-  }
-}
-
 .container {
   margin-top: 50px;
 }

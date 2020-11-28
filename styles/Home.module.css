@@ -1,7 +1,24 @@
 .container {
-  margin: 10px;
-  padding-top: 10px;
-  min-height: 100vh;
+  display: grid;
+  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 'main main aside';
+}
+header {
+  grid-area: header;
+}
+main {
+  grid-area: main;
+}
+aside {
+  grid-area: aside;
+  min-width: 230px;
+}
+footer {
+  grid-area: footer;
+}
+
+.sidebar {
   display: inline-flex;
   /*flex-direction: column;*/
   justify-content: flex-start;

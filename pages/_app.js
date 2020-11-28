@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
         ></meta>
         <meta
           name="description"
-          content="세상 모든 지식의 테크트리, tect.dev"
+          content="techtree of all knowledge, tect.dev"
         ></meta>
         <meta property="og:type" content="website" />
         <meta property="og:title" content="tect.dev" />
