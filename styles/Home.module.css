@@ -102,7 +102,7 @@ footer {
 
 .block {
   margin: 3px;
-  flex-basis: 45%;
+  /*flex-basis: 45%;*/
   width: 100px;
   height: 100px;
   padding: 3px;
