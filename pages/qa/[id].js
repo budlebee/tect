@@ -2,58 +2,49 @@ import Head from 'next/head'
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { Button} from 'antd';
-import Question from '../../src/components/Question'
 import CommentComponent from '../../src/components/Comment'
-import Answer from '../../src/components/Answer'
 import makeIterableInMap from '../../src/functions/makeIterableInMap'
+import Post from '../../src/components/Post'
+import WritePost from '../../src/components/WritePost'
 
 
-export default function QuestionAnswer() {
-    const [isLoading, setIsLoading ] = useState(true)
-    const [question, setQuestion ] = useState({})
-    const router = useRouter()
-    const id = router.query.id
-    const data = router.query.data
+export default function QuestionAnswer({ question }) {
+    return (
+        <>
+            <Head>
+                <title>{"Q&A"}, tect.dev</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <Button type="primary" href="write">질문글 작성</Button>
+            <Post data={question} type="Question" />
+            <CommentComponent data={question}/>
+            {makeIterableInMap(question.answers).map((answer) => (
+                <Post data={answer} type="Answer" key={answer.id} />
+            ))}
+            <div style={{ fontSize: "30px", fontWeight: "bold", marginLeft: "10px", marginTop: "50px", marginBottom: "20px"  }}>
+                Your Answer
+            </div>
+            <WritePost parentLoc="questions" parentID={question.id} postType="answers" />
+        </>
+    )
+  }
 
-    async function getData(){
-        const target = window.location.href.split('/').slice(-1)[0]
-        const dbURL = 'https://next-example-e8a0d.firebaseio.com/' + 'questions/' + target +'.json'
-        const res = await fetch(dbURL, { method: 'GET'})
-        const dbData = await res.json()
-        
-        setQuestion(dbData)
+export async function getServerSideProps(context) {
+    const id = context.query.id
+
+    let data = {}
+    if (context.query.data) {
+        data = JSON.parse(context.query.data)
+    } else {
+        const dbURL = 'https://next-example-e8a0d.firebaseio.com/questions/' + id +'.json'
+        const res = await fetch(dbURL)
+        data = await res.json()
     }
 
-    useEffect(()=>{
-        if (data) {
-            setQuestion(JSON.parse(data))
-        }else{
-            getData()
-        }
-        setIsLoading(false)
-    }, [])
-
-    return (
-        <div>
-        <Head>
-            <title>{"Q&A"}, tect.dev</title>
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Button type="primary" href="write">질문글 작성</Button>
-        {isLoading && (
-        <div style={{ padding: "300px 0"}}>
-            Loading
-        </div>
-        )}
-        {!isLoading && (
-            <>
-                <Question data={question} key={question.id} />
-                <CommentComponent data={question}/>
-                {makeIterableInMap(question.answers).map((answer) => (
-                    <Answer data={answer}/>
-                ))}
-            </>
-        )}
-        </div>
-    )
+    data['id'] = id
+    const question = data
+  
+    return {
+      props: {question},
+    }
   }

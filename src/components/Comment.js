@@ -7,6 +7,15 @@ import makeIterableInMap from '../../src/functions/makeIterableInMap'
 const { TextArea } = Input;
 
 export default function CommentComponent ({ data }) {
+
+	// async function deleteQuestion() {
+
+	// }
+
+	const [comments, setComments] = useState(makeIterableInMap(data.replies))
+	const [submitting, setSubmitting] = useState(false)
+	const [value, setValue] = useState('')
+
 	const CommentList = ({ comments }) => (
 		<List
 			dataSource={comments}
@@ -15,14 +24,12 @@ export default function CommentComponent ({ data }) {
 		/>
 	)
 
-	const [comments, setComments] = useState(makeIterableInMap(data.replies))
-	const [submitting, setSubmitting] = useState(false)
-	const [value, setValue] = useState('')
 	const onChange = (e) => {
+		e.preventDefault()
 		setValue(e.target.value)
 	}
 
-	const handleSubmit = () => {
+	async function handleSubmit(){
 		if (!value) {
 			return;
 		}
@@ -43,8 +50,8 @@ export default function CommentComponent ({ data }) {
 			setValue('')
 		}, 1000)
 	}
-return (
-		<>
+	return (
+			<>
 				{comments.length > 0 && <CommentList comments={comments} />}
 				<Comment
 				avatar={
@@ -66,6 +73,6 @@ return (
 				</>
 				}
 				/>
-		</>
-)
+			</>
+	)
 }
