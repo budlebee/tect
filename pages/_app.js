@@ -1,56 +1,32 @@
-// import '../styles/globals.css'
-import "../styles/antd.less";
-// import '../styles/index.css';
-// import 'antd/dist/antd.css';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { useRouter } from 'next/router'
-
-import Link from "next/link";
-
-const { Header, Content, Footer } = Layout;
-
+import React from "react";
+import Head from "next/head";
 
 const MyApp = ({ Component, pageProps }) => {
-  const router = useRouter()
-  
-  const set_defaultKey = () => {
-    const category = router.pathname.split('/')[1]
-    switch(router.pathname) {
-      case '':
-        return '1'
-      case 'article' :
-        return '2'
-      case 'qa ' :
-        return '3'
-      default:
-        return ''
-    }
-  }
   return (
-    <Layout className="layout">
-    <Header>
-      <div className="logo">
-      </div>
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={set_defaultKey()}>
-        <Menu.Item key="1">
-          <Link href="/" as={'/'}>Home</Link>
-        </Menu.Item>
-        <Menu.Item key="2">
-          <Link href="/article/main" as={'/article/main'}>Article</Link>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <Link href="/qa/main" as={'/qa/main'}>{'Q&A'}</Link>
-        </Menu.Item>
-      </Menu>
-    </Header>
-    <Content style={{ padding: '0 50px', margin: '20px 0' }}>
-      <div className="site-layout-content">
-        <Component {...pageProps} />
-      </div>
-    </Content>
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-  </Layout>
-  )
-}
+    <>
+      <Head>
+        <title>tect.dev</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
+        <meta
+          name="description"
+          content="techtree of all knowledge, tect.dev"
+        ></meta>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="tect.dev" />
+        <meta
+          property="og:description"
+          content="techtree of all knowledge, tect.dev"
+        />
+        <meta property="og:url" content="https://tect.dev"></meta>
+      </Head>
 
-export default MyApp
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default MyApp;
