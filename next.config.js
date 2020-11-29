@@ -16,17 +16,6 @@ module.exports = withCSS({
     return {
       '/': { page: '/' },
       '/about': { page: '/about' },
-      '/techtree/physics': { page: '/techtree/physics' },
-      '/techtree/math': { page: '/techtree/math' },
-      '/techtree/economy': { page: '/techtree/economy' },
-      '/techtree/electricalengineering': {
-        page: '/techtree/electricalengineering',
-      },
-      '/techtree/chemistry': { page: '/techtree/chemistry' },
-      '/techtree/biochemistry': { page: '/techtree/biochemistry' },
-      '/techtree/russia': { page: '/techtree/russia' },
-      '/techtree/cs': { page: '/techtree/cs' },
-      '/techtree/earthsystem': { page: '/techtree/earthsystem' },
       '/articles/main': { page: '/articles/main' },
       '/articles/1': { page: '/articles/1' },
     };
