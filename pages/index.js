@@ -5,14 +5,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import physicsData from '../techData/physicsTechtree';
 import mathData from '../techData/mathTechtree';
 import economicsData from '../techData/economicsTechtree';
+import csData from '../techData/csTechtree';
+import eeData from '../techData/electricalEngineeringTechtree';
+import chemData from '../techData/chemTechtree';
+import russiaData from '../techData/russiaTechtree';
+import earthSystemData from '../techData/earthSystemTechtree';
+import bioChemData from '../techData/bioChemTechtree';
 import styles from '../styles/techtreeStyles';
 import '../styles/Techtree.module.css';
+// import Image from 'next/image' next10 에서 지원하는 요소
 
 export default function App() {
   const containerRef = useRef();
   const [selected, setSelected] = useState(physicsData);
-  const [graphicUI, setGraphicUI] = useState('cytoscape-dagre');
-
+  const [graphicUI, setGraphicUI] = useState('dagre');
+  const uiToolBox = { dagre: null, 'cose-bilkent': null };
   const SubjectBlock = ({ subjectName, iconSize, displayName }) => {
     return (
       <>
@@ -240,7 +247,9 @@ export default function App() {
   useEffect(() => {
     const dagre = require('cytoscape-dagre');
     const coseBilkent = require('cytoscape-cose-bilkent');
-    cytoscape.use(dagre);
+    uiToolBox['dagre'] = dagre;
+    uiToolBox['cose-bilkent'] = coseBilkent;
+    cytoscape.use(uiToolBox[graphicUI]);
 
     const cy_for_rank = cytoscape({
       elements: selected,
@@ -315,7 +324,7 @@ export default function App() {
         },
       ],
       layout: {
-        name: 'dagre',
+        name: graphicUI,
         animate: false,
         gravityRangeCompound: 1.5,
         fit: true,
@@ -437,7 +446,7 @@ export default function App() {
     cy.on('tapend mouseout', 'node', function (e) {
       setResetFocus(e.cy);
     });
-  }, [selected]);
+  }, [selected, graphicUI]);
 
   return (
     <>
@@ -445,25 +454,27 @@ export default function App() {
         <div className="phone"></div>
         <div className="message">Please rotate your device!</div>
       </div>
+
       <div className="container">
         <main>
           <div className="tree">
             <div ref={containerRef} style={{ height: '600px' }} />
-            <div>
-              contributors
-              <br />
-              budlebeee
-            </div>
           </div>
         </main>
         <aside className="sidebar">
           <div
             onClick={() => {
               setSelected(physicsData);
+              setGraphicUI('dagre');
             }}
             className="block"
           >
-            <img src="../statics/icons/physics.svg" height="70" width="70" />
+            <img
+              src="/icons/physics.svg"
+              alt="physics"
+              height="70"
+              width="70"
+            />
             <br />
             Physics
           </div>
@@ -471,10 +482,11 @@ export default function App() {
           <div
             onClick={() => {
               setSelected(mathData);
+              setGraphicUI('dagre');
             }}
             className="block"
           >
-            <img src="../statics/icons/math.svg" height="70" width="70" />
+            <img src="/icons/math.svg" height="70" width="70" />
             <br />
             Mathematics
           </div>
@@ -482,138 +494,86 @@ export default function App() {
           <div
             onClick={() => {
               setSelected(economicsData);
+              setGraphicUI('dagre');
             }}
             className="block"
           >
-            <img src="../statics/icons/economics.svg" height="70" width="70" />
+            <img src="/icons/economics.svg" height="70" width="70" />
             <br />
             economics
           </div>
 
-          <Link
-            href="/techtree/math"
-            as={process.env.BACKEND_URL + '/techtree/math'}
+          <div
+            onClick={() => {
+              setSelected(csData);
+              setGraphicUI('dagre');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img src="../static/icons/math.svg" height="70" width="70" />
-                <br />
-                Mathematics
-              </div>
-            </a>
-          </Link>
+            <img src="/icons/computer.svg" height="50" width="50" />
+            <br />
+            Computer Science
+          </div>
 
-          <Link
-            href="/techtree/electricalengineering"
-            as={process.env.BACKEND_URL + '/techtree/electricalengineering'}
+          <div
+            onClick={() => {
+              setSelected(chemData);
+              setGraphicUI('dagre');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img
-                  src="../static/icons/electricity.svg"
-                  height="50"
-                  width="50"
-                />
-                <br />
-                Electrical
-                <br />
-                Engineering
-              </div>
-            </a>
-          </Link>
+            <img src="/icons/chemistry.svg" height="70" width="70" />
+            <br />
+            Chemistry
+          </div>
 
-          <Link
-            href="/techtree/economy"
-            as={process.env.BACKEND_URL + '/techtree/economy'}
+          <div
+            onClick={() => {
+              setSelected(bioChemData);
+              setGraphicUI('dagre');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img
-                  src="../static/icons/economics.svg"
-                  height="70"
-                  width="70"
-                />
-                <br />
-                Economics
-              </div>
-            </a>
-          </Link>
-          <Link
-            href="/techtree/chemistry"
-            as={process.env.BACKEND_URL + '/techtree/chemistry'}
+            <img src="/icons/biochemistry.svg" height="70" width="70" />
+            <br />
+            Biochemistry
+          </div>
+
+          <div
+            onClick={() => {
+              setSelected(russiaData);
+              setGraphicUI('dagre');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img
-                  src="../static/icons/chemistry.svg"
-                  height="70"
-                  width="70"
-                />
-                <br />
-                Chemistry
-              </div>
-            </a>
-          </Link>
-          <Link
-            href="/techtree/biochemistry"
-            as={process.env.BACKEND_URL + '/techtree/biochemistry'}
+            <img src="/icons/russia.svg" height="70" width="70" />
+            <br />
+            Russia
+          </div>
+
+          <div
+            onClick={() => {
+              setSelected(eeData);
+              setGraphicUI('cose-bilkent');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img
-                  src="../static/icons/biochemistry.svg"
-                  height="70"
-                  width="70"
-                />
-                <br />
-                Biochemistry
-              </div>
-            </a>
-          </Link>
-          <Link
-            href="/techtree/russia"
-            as={process.env.BACKEND_URL + '/techtree/russia'}
+            <img src="/icons/electricity.svg" height="50" width="50" />
+            <br />
+            Electrical Engineering
+          </div>
+
+          <div
+            onClick={() => {
+              setSelected(earthSystemData);
+              setGraphicUI('cose-bilkent');
+            }}
+            className="block"
           >
-            <a>
-              <div className="block">
-                <img src="../static/icons/russia.svg" height="70" width="70" />
-                <br />
-                Russia
-              </div>
-            </a>
-          </Link>
-          <Link
-            href="/techtree/cs"
-            as={process.env.BACKEND_URL + '/techtree/cs'}
-          >
-            <a>
-              <div className="block">
-                <img
-                  src="../static/icons/computer.svg"
-                  height="50"
-                  width="50"
-                />
-                <br />
-                Computer
-                <br />
-                Science
-              </div>
-            </a>
-          </Link>
-          <Link
-            href="/techtree/earthsystem"
-            as={process.env.BACKEND_URL + '/techtree/earthsystem'}
-          >
-            <a>
-              <div className="block">
-                <img src="../static/icons/earth.svg" height="50" width="50" />
-                <br />
-                Earth
-                <br />
-                System
-              </div>
-            </a>
-          </Link>
+            <img src="/icons/earth.svg" height="70" width="70" />
+            <br />
+            Earth System
+          </div>
         </aside>
       </div>
     </>
