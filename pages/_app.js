@@ -5,7 +5,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>tect.dev</title>
+        <title>techtree of all knowledge, tect.dev</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
@@ -28,5 +28,6 @@ const MyApp = ({ Component, pageProps }) => {
     </>
   );
 };
+
 
 export default MyApp;
