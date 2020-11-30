@@ -22,24 +22,17 @@ export default function App() {
   const uiToolBox = { dagre: null, 'cose-bilkent': null };
   const SubjectBlock = ({ subjectName, iconSize, displayName }) => {
     return (
-      <>
-        <Link
-          href={`/techtree/${subjectName}`}
-          as={process.env.BACKEND_URL + `/techtree/${subjectName}`}
-        >
-          <a>
-            <div className="block">
-              <img
-                src={`../statics/icons/${subjectName}.svg`}
-                height={iconSize}
-                width={iconSize}
-              />
-              <br />
-              {displayName}
-            </div>
-          </a>
-        </Link>
-      </>
+      <div
+        onClick={() => {
+          setSelected(physicsData);
+          setGraphicUI('dagre');
+        }}
+        className="block"
+      >
+        <img src="/icons/physics.svg" alt="physics" height="70" width="70" />
+        <br />
+        {displayName}
+      </div>
     );
   };
 
