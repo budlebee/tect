@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import Head from "next/head";
-
-export default function Home() {
-  return <div></div>;
-=======
 import '../styles/Home.module.css';
-import Link from 'next/link';
 import cytoscape from 'cytoscape';
 import React, { useEffect, useRef, useState } from 'react';
 import physicsData from '../techData/physicsTechtree';
@@ -577,5 +570,5 @@ export default function App() {
       </div>
     </>
   );
->>>>>>> zo
+
 }
