@@ -1,13 +1,13 @@
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, Viewer } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
-
+import parse from 'html-react-parser';
 //const { codeSyntaxHighlight } = Editor.plugin;
 export default function ToastEditor() {
   const [content, setContent] = useState();
   const editorRef = useRef();
-
+  const test = `<p>adsfasfsafaasdfsadfadsfasdfas</p> <p>asdfdsafdasf<br> saf</p> <ul> <li>sdafdsafsadfasadfsdaf</li> <li class="task-list-item" data-te-task="">dsfasdf</li> <li class="task-list-item" data-te-task="">sadfasdf</li> </ul> <table> <thead> <tr> <th>dsaf</th> <th>asdfdasf</th> </tr> </thead> <tbody> <tr> <td>sadfs</td> <td>sadfasd</td> </tr> <tr> <td>dsaf</td> <td>adsfadsf</td> </tr> </tbody> </table> <p><code data-backticks="1">console.log("hi")</code></p> <blockquote> <p>gdsahigdsag</p> </blockquote> <hr> <p>sdafsfa</p>`;
   function onClickContent() {
     setContent(editorRef.current.getInstance().getHtml());
   }
@@ -44,7 +44,10 @@ export default function ToastEditor() {
           'divider',
         ]}
       />
+      <Viewer initialValue={test} />
+
       <button onClick={onClickContent}>Submit!</button>
+      <div>{parse(`${content}`)}</div>
       <div>{content}</div>
     </>
   );
