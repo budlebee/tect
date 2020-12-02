@@ -1,4 +1,3 @@
-
 const withSass = require('@zeit/next-sass');
 const withLess = require('@zeit/next-less');
 const withCSS = require('@zeit/next-css');
@@ -18,7 +17,6 @@ module.exports = withCSS({
     // console.log('webpack');
     // console.log(config.module.rules, dev);
     config.module.rules = config.module.rules.map((rule) => {
-
       if (rule.loader === 'babel-loader') {
         rule.options.cacheDirectory = false;
       }
@@ -32,6 +30,6 @@ module.exports = withCSS({
       lessLoaderOptions: {
         javascriptEnabled: true,
       },
-    })
+    }),
   ),
 });

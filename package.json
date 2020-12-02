@@ -8,6 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@matejmazur/react-katex": "^3.1.3",
+    "@toast-ui/editor": "^2.5.1",
+    "@toast-ui/react-editor": "^2.5.1",
+    "@types/react": "^17.0.0",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
@@ -16,12 +20,19 @@
     "cytoscape": "^3.17.0",
     "cytoscape-cose-bilkent": "^4.1.0",
     "cytoscape-dagre": "^2.3.1",
+    "dotenv": "^8.2.0",
+    "firebase": "^8.1.1",
+    "firebase-admin": "^9.4.1",
     "katex": "^0.12.0",
     "less": "^3.12.2",
-    "next": "9.5.5",
+    "next": "^9.5.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "sass": "^1.29.0"
+    "react-katex": "^2.0.2",
+    "react-latex": "^2.0.0",
+    "react-latex-next": "^1.2.0",
+    "sass": "^1.29.0",
+    "typescript": "^4.1.2"
   },
   "eslintConfig": {
     "extends": [
