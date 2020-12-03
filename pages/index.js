@@ -562,7 +562,7 @@ export default function App() {
             }}
             className="block"
           >
-            <img src="/icons/earth.svg" height="70" width="70" />
+            <img src="/icons/earth.svg" height="50" width="50" />
             <br />
             Earth System
           </div>
@@ -570,5 +570,4 @@ export default function App() {
       </div>
     </>
   );
-
 }

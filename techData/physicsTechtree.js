@@ -63,6 +63,7 @@ const physicsData = [
     data: {
       id: 'quantumMechanics',
       label: '양자역학',
+      url: '/subjects/quantummechanics',
     },
   },
   {

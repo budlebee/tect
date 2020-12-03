@@ -33,6 +33,7 @@ const csData = [
     data: {
       id: '자료구조',
       label: 'Data Structure',
+      url: '/subjects/datastructure',
     },
   },
   {

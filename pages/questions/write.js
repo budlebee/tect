@@ -13,9 +13,12 @@ const Editor = dynamic(
   () => import('@toast-ui/react-editor').then((m) => m.Editor),
   { ssr: false },
 );
-const ToastEditor = dynamic(() => import('../components/ToastEditor.js'), {
-  ssr: false,
-});
+const ToastEditor = dynamic(
+  () => import('../components/QuestionToastEditor.js'),
+  {
+    ssr: false,
+  },
+);
 
 const Latex = dynamic(() => import('react-latex'), { ssr: false });
 
@@ -40,25 +43,7 @@ export default function Write() {
 
   return (
     <>
-      <input
-        id="postTitleInput"
-        placeholder="제목"
-        onChange={onChangeTitle}
-        value={title}
-        key="PostTitleComponent_Input"
-      />
-      <textarea
-        id="postBodyInput"
-        rows={10}
-        placeholder="본문"
-        onChange={onChangeBodyText}
-        value={bodyText}
-        spellCheck={false}
-        key="PostBodyComponent_Input"
-        style={{ resize: 'none' }}
-      />
-      <button onClick={onSubmit}>Submit</button>
-      <ToastEditor></ToastEditor>
+      <ToastEditor />
     </>
   );
 }

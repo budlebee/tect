@@ -1,5 +1,7 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -24,10 +26,30 @@ const MyApp = ({ Component, pageProps }) => {
         <meta property="og:url" content="https://tect.dev"></meta>
       </Head>
 
+      <nav className="navbar">
+        <span className="navbar-item">
+          <Link href="/" as={process.env.BACKEND_URL + '/'}>
+            <a>Tect.dev</a>
+          </Link>
+        </span>
+        <span className="navbar-item">
+          <Link
+            href="/questions/main"
+            as={process.env.BACKEND_URL + '/questions/main'}
+          >
+            <a>questions</a>
+          </Link>
+        </span>
+        <span className="navbar-item">
+          <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
+            <a>About</a>
+          </Link>
+        </span>
+      </nav>
+
       <Component {...pageProps} />
     </>
   );
 };
-
 
 export default MyApp;

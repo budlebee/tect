@@ -6,11 +6,29 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.mainContainer {
+  padding: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
+a:hover {
+  color: #0367a6;
+}
+
 * {
   box-sizing: border-box;
+}
+
+.navbar {
+  padding: 10px;
+}
+
+.navbar-item {
+  padding: 10px;
 }
