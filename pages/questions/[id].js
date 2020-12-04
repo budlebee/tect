@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
+import '../../styles/Questions.module.css';
 
 const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
   ssr: false,
@@ -13,6 +14,10 @@ const AnswerToastEditor = dynamic(
 );
 
 const Question = (props) => {
+  const [comment, setComment] = useState();
+  const [comments, setComments] = useState(props.question.comments);
+  //const [answers, setAnswers] = useState(props.question.answers);
+
   var date = new Date(props.question.createdAt.seconds * 1000);
   // Hours part from the timestamp
   var hours = date.getHours();
@@ -27,6 +32,28 @@ const Question = (props) => {
 
   const createdAt = 'created at ' + date;
 
+  function onChangeComment(e) {
+    setComment(e.target.value);
+  }
+
+  async function onSubmitComment() {
+    let questionDoc = await db.collection('questions').doc(props.questionID);
+    let now = firebase.firestore.Timestamp.fromDate(new Date());
+    let commentInfo = {
+      content: comment,
+      createdAt: now,
+      author: {
+        nickname: '임시로 고정된 닉네임',
+        uid: '임시 user uid',
+      },
+    };
+    let setCommentToQuestion = await questionDoc.update({
+      comments: [...props.question.comments, commentInfo],
+    });
+    //window.location.href = `/questions/${props.questionID}`;
+    setComments([...comments, commentInfo]);
+    setComment('');
+  }
   useEffect(() => {}, []);
 
   return (
@@ -37,10 +64,18 @@ const Question = (props) => {
 
         <ToastViewer initialValue={props.question.content} />
 
+        <div>Comments on Question</div>
+        {comments.map((comment) => {
+          return <div key={comment.id}>{comment.content}</div>;
+        })}
+        <input placeholder={'짧은 코멘트 남기기'} onChange={onChangeComment} />
+        <button onClick={onSubmitComment}>댓글 남기기</button>
+
         <div>
+          <h3>Answers</h3>
           {props.question.answers.map((answer) => {
             return (
-              <div key={answer.id}>
+              <div key={answer.id} className="answerBlock">
                 <ToastViewer initialValue={answer.content} />
               </div>
             );
@@ -48,8 +83,11 @@ const Question = (props) => {
         </div>
 
         <div className="answerBlock">
-          <h3>Answer</h3>
-          <AnswerToastEditor questionID={props.questionID} />
+          <h3>Add New Answer</h3>
+          <AnswerToastEditor
+            questionID={props.questionID}
+            answers={props.question.answers}
+          />
         </div>
       </div>
     </>
@@ -70,16 +108,6 @@ export async function getServerSideProps(ctx) {
         const docData = JSON.parse(JSON.stringify(doc.data()));
         question = { id: doc.id, ...docData };
       });
-
-    try {
-      db.collection('questions')
-        .doc(ctx.query.id)
-        .collection('answers')
-        .get()
-        .then((doc) => {});
-    } catch (err) {
-      console.log('there is no answer');
-    }
 
     return {
       props: {

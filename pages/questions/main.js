@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { db } from '../../firebaseConfig';
-import { Button } from 'antd';
 import '../../styles/Questions.module.css';
 
 export default function Main({ questions }) {
@@ -13,9 +12,11 @@ export default function Main({ questions }) {
   return (
     <>
       <div className="mainContainer">
-        <Button type="primary" href="write">
-          질문하기
-        </Button>
+        <button>
+          <Link href="/questions/write">
+            <a>질문하기</a>
+          </Link>
+        </button>
         {questions.map((element) => {
           return (
             <div key={element.id}>

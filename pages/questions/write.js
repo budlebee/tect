@@ -1,18 +1,12 @@
-//import katex from 'katex';
 import React, { useEffect, useState, useRef } from 'react';
-//import Latex from 'react-latex-next';
-//import 'katex/dist/katex.min.css';
-//import TeX from '@matejmazur/react-katex';
-//import ReactDOM from 'react-dom';
-//import { BlockMath, InlineMath } from 'react-katex';
-import { Button, Form, Input, Spin } from 'antd';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
-//import { EditorProps } from '@toast-ui/react-editor';
 
 const Editor = dynamic(
   () => import('@toast-ui/react-editor').then((m) => m.Editor),
   { ssr: false },
 );
+
 const ToastEditor = dynamic(
   () => import('../components/QuestionToastEditor.js'),
   {
@@ -20,14 +14,11 @@ const ToastEditor = dynamic(
   },
 );
 
-const Latex = dynamic(() => import('react-latex'), { ssr: false });
+//const katex = dynamic(() => import('katex'), { ssr: false });
 
 export default function Write() {
   const [title, setTitle] = useState('');
   const [bodyText, setBodyText] = useState('');
-  const containerRef = useRef();
-
-  const latexText = '$v^{2}$';
 
   function onChangeTitle(e) {
     setTitle(e.target.value);
@@ -43,6 +34,21 @@ export default function Write() {
 
   return (
     <>
+      <Head>
+        <title>write a question..</title>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="/static/css/paraiso-light.css"
+          media="screen"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="/static/css/katex.min.css"
+          media="screen"
+        />
+      </Head>
       <ToastEditor />
     </>
   );

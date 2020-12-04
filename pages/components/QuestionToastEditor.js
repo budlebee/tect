@@ -34,6 +34,7 @@ export default function ToastEditor() {
         uid: '임시 uid',
       },
       answers: [],
+      comments: [],
     });
     window.location.href = `/questions/${uid20}`;
   }
