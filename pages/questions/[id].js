@@ -4,6 +4,12 @@ import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
 
+import { Form, Input, Comment, Button, List, Typography, Card, Pagination } from 'antd';
+import QuestionCommentWrite from '../components/QuestionCommentWrite';
+const { Title } = Typography;
+const { Meta } = Card;
+const { TextArea } = Input;
+
 const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
   ssr: false,
 });
@@ -11,79 +17,115 @@ const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
 const AnswerToastEditor = dynamic(
   () => import('../components/AnswerToastEditor'),
   { ssr: false },
-);
+)
+
+const getObjectLength = (parent) => {
+  if(!parent){return 0}
+  let count = 0
+  for (let [key, value] of Object.entries(parent)) {
+    count += 1
+  }
+  return count
+}
+const getDate = (timestamp) => {
+  const local =new Date()
+  const localTimeZone = local.getTimezoneOffset()
+
+  const createdAt = new Date(timestamp * 1000 - localTimeZone * 60 * 1000)
+  const date = createdAt.toISOString().split('T')[0]
+  const time = createdAt.toISOString().split('T')[1].split('.')[0]
+  return `created at ${date} ${time}`
+}
 
 const Question = (props) => {
-  const [comment, setComment] = useState();
-  const [comments, setComments] = useState(props.question.comments);
-  //const [answers, setAnswers] = useState(props.question.answers);
-
-  var date = new Date(props.question.createdAt.seconds * 1000);
-  // Hours part from the timestamp
-  var hours = date.getHours();
-  // Minutes part from the timestamp
-  var minutes = '0' + date.getMinutes();
-  // Seconds part from the timestamp
-  var seconds = '0' + date.getSeconds();
-
-  // Will display time in 10:30:23 format
-  var formattedTime =
-    hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
-  const createdAt = 'created at ' + date;
-
-  function onChangeComment(e) {
-    setComment(e.target.value);
-  }
-
-  async function onSubmitComment() {
-    let questionDoc = await db.collection('questions').doc(props.questionID);
-    let now = firebase.firestore.Timestamp.fromDate(new Date());
-    let commentInfo = {
-      content: comment,
-      createdAt: now,
-      author: {
-        nickname: '임시로 고정된 닉네임',
-        uid: '임시 user uid',
-      },
-    };
-    let setCommentToQuestion = await questionDoc.update({
-      comments: [...props.question.comments, commentInfo],
-    });
-    //window.location.href = `/questions/${props.questionID}`;
-    setComments([...comments, commentInfo]);
-    setComment('');
-  }
-  useEffect(() => {}, []);
+  console.log("시발")
 
   return (
     <>
       <div className="mainContainer">
-        <h2>Q. {props.question.title}</h2>
-        <div>{createdAt}</div>
+        <Card
+          style={{ marginTop: 16 }}
+          actions={[
+            <div style={{ float: "left", paddingLeft: '15px'}}>
+              답변 {getObjectLength(props.question.answers)}개, 댓글 {getObjectLength(props.question.comments)}개
+            </div>
+          ]}
+          title={props.question.title}
+        >
+          <Meta
+            avatar={<span style={{ fontWeight: 'bold', fontSize: '20px'}}>Q</span>}
+            title={props.question.author.nickname}
+            description={<div style={{ marginBottom: "10px", marginTop: "-5px" }}>
+              {getDate(props.question.createdAt.seconds)}
+              {/* {createdAt} */}
+              </div>}
+          />
+          <ToastViewer initialValue={props.question.content} />
+        </Card>
 
-        <ToastViewer initialValue={props.question.content} />
+        
 
-        <div>Comments on Question</div>
-        {comments.map((comment) => {
-          return <div key={comment.id}>{comment.content}</div>;
+        {props.question.comments && props.question.comments.map((comment)=>{
+          return(
+            <Comment style={{ marginLeft: "15px" }}
+              author={comment.author.nickname}
+              // avatar={'ㄴ'}
+              content={<div style={{ whiteSpace:"pre" }}>{comment.content}</div>}
+              datetime={getDate(comment.createdAt.seconds)}
+            >
+            </Comment>
+          )
         })}
-        <input placeholder={'짧은 코멘트 남기기'} onChange={onChangeComment} />
-        <button onClick={onSubmitComment}>댓글 남기기</button>
+
+
+        <QuestionCommentWrite
+            questionID={props.questionID}
+            comments={props.question.comments}
+          />
+
+
+
+
 
         <div>
-          <h3>Answers</h3>
-          {props.question.answers.map((answer) => {
+          <br/>
+          <Title level={2}
+          style={{ marginTop: "10px", marginLeft: "15px"}}
+          >{getObjectLength(props.question.answers)} Answers
+          </Title>
+          {props.question.answers && props.question.answers.map((answer) => {
             return (
-              <div key={answer.id} className="answerBlock">
+              <Card
+                style={{ marginTop: 16 }}
+                actions={[
+                  <div style={{ float: "left", paddingLeft: '15px'}}>
+                    댓글 {getObjectLength(answer.comment)}개
+                  </div>
+                ]}
+                title={answer.title}
+              >
+                <Meta
+                  avatar={<span style={{ fontWeight: 'bold', fontSize: '20px'}}>A</span>}
+                  title={answer.author.nickname}
+                  description={<div style={{ marginBottom: "10px", marginTop: "-5px" }}>
+                    {getDate(answer.createdAt.seconds)}
+                    {/* {createdAt} */}
+                    </div>}
+                />
                 <ToastViewer initialValue={answer.content} />
-              </div>
+              </Card>
+              // <div key={answer.id} className="answerBlock">
+              //   <ToastViewer initialValue={answer.content} />
+              // </div>
             );
           })}
         </div>
 
         <div className="answerBlock">
-          <h3>Add New Answer</h3>
+          <Title level={2}
+            style={{ marginTop: "50px", marginLeft: "15px"}}
+            >Add Answer
+          </Title>
           <AnswerToastEditor
             questionID={props.questionID}
             answers={props.question.answers}

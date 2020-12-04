@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }) => {
           <a style={{color:"black"}}>Tect.dev</a>
           </Link>}
         tags={
-        <Menu mode="horizontal">
+        <Menu mode="horizontal" >
           <Menu.Item key="about">
             <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
               <a>About</a>
@@ -65,7 +65,8 @@ const MyApp = ({ Component, pageProps }) => {
         }>
         </PageHeader>
 
-      <Component {...pageProps} />
+      <Component
+       {...pageProps} />
     </>
   );
 };
