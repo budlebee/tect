@@ -48,7 +48,7 @@ const Question = (props) => {
       },
     };
     let setCommentToQuestion = await questionDoc.update({
-      comments: [...props.question.comments, commentInfo],
+      comments: [...comments, commentInfo],
     });
     //window.location.href = `/questions/${props.questionID}`;
     setComments([...comments, commentInfo]);
@@ -68,7 +68,11 @@ const Question = (props) => {
         {comments.map((comment) => {
           return <div key={comment.id}>{comment.content}</div>;
         })}
-        <input placeholder={'짧은 코멘트 남기기'} onChange={onChangeComment} />
+        <input
+          placeholder={'짧은 코멘트 남기기'}
+          onChange={onChangeComment}
+          value={comment}
+        />
         <button onClick={onSubmitComment}>댓글 남기기</button>
 
         <div>
