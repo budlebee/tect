@@ -57,6 +57,7 @@ const Question = (props) => {
   const [tempPassword, setTempPassword] = useState();
   const [isTryingEdit, setIsTryingEdit] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(props.question.answers.length);
 
   function onChangeTempPassword(e) {
     setTempPassword(e.target.value);
@@ -103,14 +104,14 @@ const Question = (props) => {
           ) : (
             <ToastViewer initialValue={props.question.content} />
           )}
-          {!isTryingEdit && !isAuth ? (
+          {!isTryingEdit && !isAuth && isAnswered == 0 ? (
             <div>
               <button
                 onClick={() => {
                   setIsTryingEdit(true);
                 }}
               >
-                Wanna update your question?
+                edit your question?
               </button>
             </div>
           ) : (

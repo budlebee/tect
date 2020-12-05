@@ -3,7 +3,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
 import firebase from 'firebase/app';
-import fire, { db } from '../../firebaseConfig';
+import { db } from '../../firebaseConfig';
 //const { codeSyntaxHighlight } = Editor.plugin;
 
 // props 로 해당하는 subject 주소 받을것.
@@ -12,7 +12,7 @@ export default function ToastEditor(props) {
   const editorRef = useRef();
 
   async function onClickContent() {
-    setContent(editorRef.current.getInstance().getHtml());
+    setContent(editorRef.current.getInstance().getMarkdown());
 
     // 글 추가하기 기능 완성해야함
     const subjectDoc = db.collection('subjects').doc(props.subjectID);
@@ -24,12 +24,9 @@ export default function ToastEditor(props) {
 
     let setToDB = await subjectPosts.doc().set({
       content: content,
-
       createdAt: now,
-      author: {
-        nickname: '임시로 고정된 닉네임',
-        uid: '임시 uid',
-      },
+      authorNickname: '임시로 고정된 닉네임',
+      authorUID: '임시 uid',
     });
     window.location.href = `/subjects/${props.subjectID}`;
   }

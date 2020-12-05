@@ -41,7 +41,7 @@ export default function Main(props) {
         .collection('questions')
         .orderBy('createdAt', 'desc')
         .startAfter(startSnapshot)
-        .limit(5)
+        .limit(7)
         .get();
 
       const updatedQuestions = (await questionsRef).docs.map((doc) => {
@@ -63,7 +63,6 @@ export default function Main(props) {
     if (!value) {
       return;
     }
-    console.log(value);
     try {
       const searchRef = db
         .collection('questions')
@@ -178,7 +177,7 @@ export async function getServerSideProps() {
   const questionsRef = db
     .collection('questions')
     .orderBy('createdAt', 'desc')
-    .limit(5)
+    .limit(7)
     .get();
   const questions = (await questionsRef).docs.map((doc) => {
     const docData = JSON.parse(JSON.stringify(doc.data()));

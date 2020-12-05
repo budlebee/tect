@@ -35,7 +35,7 @@ const Subject = (props) => {
         </div>
         <br />
 
-        <h3>{props.subjectInfo.name}을 공부하는데 유용한 정보 남기기</h3>
+        <h3>{props.subjectInfo.name}와 관련된 유용한 정보 남기기</h3>
         <SubjectToastEditor subjectID={props.subjectID} />
       </div>
     </>
@@ -51,6 +51,7 @@ export async function getServerSideProps(ctx) {
     const subjectPosts = subjectDoc
       .collection('posts')
       .orderBy('createdAt', 'desc')
+      .limit(7)
       .get();
 
     const posts = await (await subjectPosts).docs.map((doc) => {
