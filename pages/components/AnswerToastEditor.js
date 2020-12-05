@@ -22,10 +22,8 @@ export default function ToastEditor(props) {
     let answerInfo = {
       content: content,
       createdAt: now,
-      author: {
-        nickname: '임시로 고정된 닉네임',
-        uid: '임시 user uid',
-      },
+      authorNickname: '임시로 고정된 닉네임',
+      authorUID: '임시 user uid',
     };
     let setToAnswerCol = await answersCol.doc().set(answerInfo);
     let setToAnswerInQuestion = await questionDoc.update({
@@ -63,6 +61,7 @@ export default function ToastEditor(props) {
           'code',
           'codeblock',
           'divider',
+          'image',
         ]}
       />
 

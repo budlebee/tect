@@ -2,6 +2,18 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import '../styles/globals.css';
+import '../styles/antd.less';
+
+import { Menu, Typography, Layout, PageHeader } from 'antd';
+import {
+  MailOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+
+// const { SubMenu } = Menu;
+const { Title } = Typography;
+const { Header, Content, Footer } = Layout;
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -25,27 +37,39 @@ const MyApp = ({ Component, pageProps }) => {
         />
         <meta property="og:url" content="https://tect.dev"></meta>
       </Head>
+      <PageHeader
+        title={
+          <Link href="/" as={process.env.BACKEND_URL}>
+            <a style={{ color: 'black' }}>Tect.dev</a>
+          </Link>
+        }
+        tags={
+          <Menu mode="horizontal">
+            <Menu.Item danger={true} key="questions">
+              <Link
+                href="/questions/main"
+                as={process.env.BACKEND_URL + '/questions/main'}
+              >
+                <a>Questions</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="about">
+              <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
+                <a>About</a>
+              </Link>
+            </Menu.Item>
 
-      <nav className="navbar">
-        <span className="navbar-item">
-          <Link href="/" as={process.env.BACKEND_URL + '/'}>
-            <a>Tect.dev</a>
-          </Link>
-        </span>
-        <span className="navbar-item">
-          <Link
-            href="/questions/main"
-            as={process.env.BACKEND_URL + '/questions/main'}
-          >
-            <a>questions</a>
-          </Link>
-        </span>
-        <span className="navbar-item">
-          <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
-            <a>About</a>
-          </Link>
-        </span>
-      </nav>
+            <Menu.Item key="articles" disabled={true}>
+              <Link
+                href="/questions/articles"
+                as={process.env.BACKEND_URL + '/articles/main'}
+              >
+                <a>Articles</a>
+              </Link>
+            </Menu.Item>
+          </Menu>
+        }
+      ></PageHeader>
 
       <Component {...pageProps} />
     </>

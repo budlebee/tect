@@ -6,7 +6,7 @@ import fire, { db } from '../../firebaseConfig';
 import { uid } from 'uid';
 
 //const { codeSyntaxHighlight } = Editor.plugin;
-export default function ToastEditor() {
+export default function ToastEditor(props) {
   const [title, setTitle] = useState();
   const [userID, setUserID] = useState();
   const [tempNickname, setTempNickname] = useState();
@@ -65,6 +65,7 @@ export default function ToastEditor() {
         initialEditType="markdown"
         placeholder="글쓰기"
         ref={editorRef}
+        initialValue={props.question.content}
         toolbarItems={[
           'heading',
           'bold',
@@ -89,17 +90,8 @@ export default function ToastEditor() {
           'image',
         ]}
       />
-      <input
-        onChange={onChangeTempNickname}
-        placeholder={'임시 닉네임'}
-        required={true}
-      />
-      <input
-        onChange={onChangeTempPassword}
-        placeholder={'임시 비밀번호'}
-        required={true}
-      />
-      <button onClick={onClickSubmit}>질문하기!</button>
+
+      <button onClick={onClickSubmit}>질문 수정하기</button>
     </>
   );
 }
