@@ -14,7 +14,7 @@ export default function ToastEditor(props) {
 
   async function onClickContent() {
     //  setContent(editorRef.current.getInstance().getHtml().toString());
-    const content = editorRef.current.getInstance().getHtml().toString();
+    const content = editorRef.current.getInstance().getMarkdown().toString();
     let questionDoc = await db.collection('questions').doc(props.questionID);
     let answersCol = db.collection('answers');
     let date = new Date();

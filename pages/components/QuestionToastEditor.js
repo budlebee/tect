@@ -33,7 +33,7 @@ export default function ToastEditor() {
     }
     const uid20 = uid(20);
     //    setContent(editorRef.current.getInstance().getHtml().outerHTML);
-    const content = editorRef.current.getInstance().getHtml().toString();
+    const content = editorRef.current.getInstance().getMarkdown().toString();
     let questionsRef = await db.collection('questions');
     let date = new Date();
     let now = fire.firestore.Timestamp.fromDate(new Date());
@@ -48,6 +48,7 @@ export default function ToastEditor() {
       authorUID: uid20,
       answers: [],
       comments: [],
+      lastUpdate: null,
     });
     window.location.href = `/questions/${uid20}`;
   }

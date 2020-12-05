@@ -14,6 +14,7 @@ import {
   Pagination,
 } from 'antd';
 import QuestionCommentWrite from '../components/QuestionCommentWrite';
+import { getAllJSDocTags } from 'typescript';
 const { Title } = Typography;
 const { Meta } = Card;
 const { TextArea } = Input;
@@ -24,6 +25,11 @@ const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
 
 const AnswerToastEditor = dynamic(
   () => import('../components/AnswerToastEditor'),
+  { ssr: false },
+);
+
+const QuestionEditToastEditor = dynamic(
+  () => import('../components/QuestionEditToastEditor'),
   { ssr: false },
 );
 
@@ -44,10 +50,17 @@ const getDate = (timestamp) => {
   const createdAt = new Date(timestamp * 1000 - localTimeZone * 60 * 1000);
   const date = createdAt.toISOString().split('T')[0];
   const time = createdAt.toISOString().split('T')[1].split('.')[0];
-  return `created at ${date} ${time}`;
+  return `${date} ${time}`;
 };
 
 const Question = (props) => {
+  const [tempPassword, setTempPassword] = useState();
+  const [isTryingEdit, setIsTryingEdit] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+
+  function onChangeTempPassword(e) {
+    setTempPassword(e.target.value);
+  }
   return (
     <>
       <div className="mainContainer">
@@ -68,12 +81,62 @@ const Question = (props) => {
             title={props.question.authorNickname}
             description={
               <div style={{ marginBottom: '10px', marginTop: '-5px' }}>
-                {getDate(props.question.createdAt.seconds)}
+                <div>
+                  created at {getDate(props.question.createdAt.seconds)}
+                </div>
+                {props.question.lastUpdate ? (
+                  <div>
+                    updated at {getDate(props.question.lastUpdate.seconds)}
+                  </div>
+                ) : (
+                  ''
+                )}
                 {/* {createdAt} */}
               </div>
             }
           />
-          <ToastViewer initialValue={props.question.content} />
+          {isAuth ? (
+            <QuestionEditToastEditor
+              question={props.question}
+              questionID={props.questionID}
+            />
+          ) : (
+            <ToastViewer initialValue={props.question.content} />
+          )}
+          {!isTryingEdit && !isAuth ? (
+            <div>
+              <button
+                onClick={() => {
+                  setIsTryingEdit(true);
+                }}
+              >
+                Wanna update your question?
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
+          {isTryingEdit && !isAuth ? (
+            <div>
+              <input
+                placeholder={'작성시 입력한 비밀번호'}
+                onChange={onChangeTempPassword}
+              ></input>
+              <button
+                onClick={() => {
+                  if (tempPassword == props.question.authorTempPassword) {
+                    setIsAuth(true);
+                  } else {
+                    alert('비밀번호가 다릅니다.');
+                  }
+                }}
+              >
+                글 수정하기
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
         </Card>
 
         {props.question.comments &&

@@ -34,36 +34,6 @@ export default function EditQuestion(props) {
           media="screen"
         />
       </Head>
-      <ToastEditor question={props.question} />
     </>
   );
-}
-
-export async function getServerSideProps(ctx) {
-  try {
-    // Get a reference to the database service
-
-    let question = {};
-
-    await db
-      .collection('questions')
-      .doc(ctx.query.id)
-      .get()
-      .then((doc) => {
-        const docData = JSON.parse(JSON.stringify(doc.data()));
-        question = { id: doc.id, ...docData };
-      });
-
-    return {
-      props: {
-        questionID: ctx.query.id,
-        question: question,
-      },
-    };
-  } catch (err) {
-    console.log('error: ', err);
-    return {
-      props: {},
-    };
-  }
 }

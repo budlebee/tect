@@ -7,58 +7,21 @@ import { uid } from 'uid';
 
 //const { codeSyntaxHighlight } = Editor.plugin;
 export default function ToastEditor(props) {
-  const [title, setTitle] = useState();
-  const [userID, setUserID] = useState();
-  const [tempNickname, setTempNickname] = useState();
-  const [tempPassword, setTempPassword] = useState();
-  //const [content, setContent] = useState();
   const editorRef = useRef();
 
-  function onChangeTempNickname(e) {
-    setTempNickname(e.target.value);
-  }
-
-  function onChangeTempPassword(e) {
-    setTempPassword(e.target.value);
-  }
-
-  function onChangeTitle(e) {
-    setTitle(e.target.value);
-  }
-
   async function onClickSubmit() {
-    if (!tempNickname || !tempPassword) {
-      alert('닉네임과 비밀번호를 설정해 주세요');
-      return;
-    }
-    const uid20 = uid(20);
-    //    setContent(editorRef.current.getInstance().getHtml().outerHTML);
-    const content = editorRef.current.getInstance().getHtml().toString();
-    let questionsRef = await db.collection('questions');
-    let date = new Date();
+    const content = editorRef.current.getInstance().getMarkdown().toString();
     let now = fire.firestore.Timestamp.fromDate(new Date());
-
-    let setToDB = await questionsRef.doc(uid20).set({
-      title: title,
+    let questionDoc = db.collection('questions').doc(props.questionID);
+    let updateQuestion = await questionDoc.update({
       content: content,
-      subject: 'physics',
-      createdAt: now,
-      authorNickname: tempNickname,
-      authorTempPassword: tempPassword,
-      authorUID: uid20,
-      answers: [],
-      comments: [],
+      lastUpdate: now,
     });
-    window.location.href = `/questions/${uid20}`;
+    window.location.href = `/questions/${props.questionID}`;
   }
 
   return (
     <>
-      <input
-        onChange={onChangeTitle}
-        placeholder={'질문을 한줄로 요약해 주세요'}
-        required={true}
-      />
       <Editor
         previewStyle="vertical"
         height="500px"
@@ -91,7 +54,7 @@ export default function ToastEditor(props) {
         ]}
       />
 
-      <button onClick={onClickSubmit}>질문 수정하기</button>
+      <button onClick={onClickSubmit}>수정 완료</button>
     </>
   );
 }
