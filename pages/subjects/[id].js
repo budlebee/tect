@@ -4,16 +4,16 @@ import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Subject.module.css';
 
-const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
-  ssr: false,
-});
-
-const SubjectToastEditor = dynamic(
-  () => import('../components/SubjectToastEditor'),
-  { ssr: false },
-);
-
 const Subject = (props) => {
+  const ToastViewer = dynamic(() => import('../../components/ToastViewer'), {
+    ssr: false,
+  });
+
+  const SubjectToastEditor = dynamic(
+    () => import('../../components/SubjectToastEditor'),
+    { ssr: false },
+  );
+
   useEffect(() => {
     console.log(props.posts);
   }, []);

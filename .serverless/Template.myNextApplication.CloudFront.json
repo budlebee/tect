@@ -1,0 +1,91 @@
+{
+  "id": "E25NKODJ5B82TA",
+  "arn": "arn:aws:cloudfront::397663487542:distribution/E25NKODJ5B82TA",
+  "url": "https://d24p6x745sb0yr.cloudfront.net",
+  "region": "us-east-1",
+  "enabled": true,
+  "comment": "",
+  "priceClass": "PriceClass_All",
+  "origins": [
+    {
+      "url": "http://jpxufcd-29tfbe.s3.us-east-1.amazonaws.com",
+      "private": true,
+      "pathPatterns": {
+        "_next/static/*": {
+          "minTTL": 0,
+          "defaultTTL": 86400,
+          "maxTTL": 31536000,
+          "forward": {
+            "headers": "none",
+            "cookies": "none",
+            "queryString": false
+          }
+        },
+        "static/*": {
+          "minTTL": 0,
+          "defaultTTL": 86400,
+          "maxTTL": 31536000,
+          "forward": {
+            "headers": "none",
+            "cookies": "none",
+            "queryString": false
+          }
+        },
+        "api/*": {
+          "minTTL": 0,
+          "defaultTTL": 0,
+          "maxTTL": 31536000,
+          "allowedHttpMethods": [
+            "HEAD",
+            "DELETE",
+            "POST",
+            "GET",
+            "OPTIONS",
+            "PUT",
+            "PATCH"
+          ],
+          "lambda@edge": {
+            "origin-request": "arn:aws:lambda:us-east-1:397663487542:function:jpxufcd-g8zyimf:2"
+          }
+        },
+        "_next/data/*": {
+          "minTTL": 0,
+          "defaultTTL": 0,
+          "maxTTL": 31536000,
+          "allowedHttpMethods": [
+            "HEAD",
+            "GET"
+          ],
+          "lambda@edge": {
+            "origin-response": "arn:aws:lambda:us-east-1:397663487542:function:jpxufcd-ko90ocq:2",
+            "origin-request": "arn:aws:lambda:us-east-1:397663487542:function:jpxufcd-ko90ocq:2"
+          }
+        }
+      }
+    }
+  ],
+  "errorPages": [],
+  "defaults": {
+    "minTTL": 0,
+    "defaultTTL": 0,
+    "maxTTL": 31536000,
+    "forward": {
+      "cookies": "all",
+      "queryString": true
+    },
+    "allowedHttpMethods": [
+      "HEAD",
+      "DELETE",
+      "POST",
+      "GET",
+      "OPTIONS",
+      "PUT",
+      "PATCH"
+    ],
+    "lambda@edge": {
+      "origin-request": "arn:aws:lambda:us-east-1:397663487542:function:jpxufcd-ko90ocq:2",
+      "origin-response": "arn:aws:lambda:us-east-1:397663487542:function:jpxufcd-ko90ocq:2"
+    },
+    "compress": true
+  }
+}

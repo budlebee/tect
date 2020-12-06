@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
 import { Input, Comment, Typography, Card } from 'antd';
-import ArticleCommentWrite from '../components/ArticleCommentWrite';
+import ArticleCommentWrite from '../../components/ArticleCommentWrite';
 
 const { Title } = Typography;
 const { Meta } = Card;
 const { TextArea } = Input;
 
-const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
+const ToastViewer = dynamic(() => import('../../components/ToastViewer'), {
   ssr: false,
 });
 

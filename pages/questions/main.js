@@ -7,10 +7,6 @@ import { Button, List, Typography, Card, Pagination, Input } from 'antd';
 import Item from 'antd/lib/list/Item';
 import { urlObjectKeys } from 'next/dist/next-server/lib/utils';
 
-const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
-  ssr: false,
-});
-
 const { Search } = Input;
 const { Paragraph } = Typography;
 const { Meta } = Card;

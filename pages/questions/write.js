@@ -2,23 +2,18 @@ import React, { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-const Editor = dynamic(
-  () => import('@toast-ui/react-editor').then((m) => m.Editor),
-  { ssr: false },
-);
-
-const ToastEditor = dynamic(
-  () => import('../components/QuestionToastEditor.js'),
-  {
-    ssr: false,
-  },
-);
-
 //const katex = dynamic(() => import('katex'), { ssr: false });
 
 export default function Write() {
   const [title, setTitle] = useState('');
   const [bodyText, setBodyText] = useState('');
+
+  const ToastEditor = dynamic(
+    () => import('../../components/QuestionToastEditor.js'),
+    {
+      ssr: false,
+    },
+  );
 
   function onChangeTitle(e) {
     setTitle(e.target.value);
@@ -33,7 +28,7 @@ export default function Write() {
   useEffect(() => {}, []);
 
   return (
-    <>
+    <div className="mainContainer">
       <Head>
         <title>write a question..</title>
         <link
@@ -50,6 +45,6 @@ export default function Write() {
         />
       </Head>
       <ToastEditor />
-    </>
+    </div>
   );
 }

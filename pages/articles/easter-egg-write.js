@@ -3,7 +3,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
 const ToastEditor = dynamic(
-  () => import('../components/ArticleToastEditor.js'),
+  () => import('../../components/ArticleToastEditor.js'),
   {
     ssr: false,
   },

@@ -13,12 +13,11 @@ import {
   Card,
   Pagination,
 } from 'antd';
-import QuestionCommentWrite from '../components/QuestionCommentWrite';
-import { getAllJSDocTags } from 'typescript';
+import QuestionCommentWrite from '../../components/QuestionCommentWrite';
 const { Title } = Typography;
 const { Meta } = Card;
 const { TextArea } = Input;
-
+/*
 const ToastViewer = dynamic(() => import('../components/ToastViewer'), {
   ssr: false,
 });
@@ -32,7 +31,7 @@ const QuestionEditToastEditor = dynamic(
   () => import('../components/QuestionEditToastEditor'),
   { ssr: false },
 );
-
+*/
 const getObjectLength = (parent) => {
   if (!parent) {
     return 0;
@@ -59,9 +58,25 @@ const Question = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAnswered, setIsAnswered] = useState(props.question.answers.length);
 
+  const ToastViewer = dynamic(() => import('../../components/ToastViewer'), {
+    ssr: false,
+  });
+
+  const AnswerToastEditor = dynamic(
+    () => import('../../components/AnswerToastEditor'),
+    { ssr: false },
+  );
+
+  const QuestionEditToastEditor = dynamic(
+    () => import('../../components/QuestionEditToastEditor'),
+    { ssr: false },
+  );
+
   function onChangeTempPassword(e) {
     setTempPassword(e.target.value);
   }
+
+  useEffect(() => {}, []);
   return (
     <>
       <div className="mainContainer">
