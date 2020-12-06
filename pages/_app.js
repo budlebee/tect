@@ -53,18 +53,17 @@ const MyApp = ({ Component, pageProps }) => {
                 <a>Questions</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="about">
-              <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
-                <a>About</a>
-              </Link>
-            </Menu.Item>
-
-            <Menu.Item key="articles" disabled={true}>
+            <Menu.Item key="articles" disabled={false}>
               <Link
-                href="/questions/articles"
+                href="/articles/main"
                 as={process.env.BACKEND_URL + '/articles/main'}
               >
                 <a>Articles</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="about">
+              <Link href="/about" as={process.env.BACKEND_URL + '/about'}>
+                <a>About</a>
               </Link>
             </Menu.Item>
           </Menu>

@@ -32,10 +32,8 @@ export default function ToastEditor() {
       return;
     }
     const uid20 = uid(20);
-    //    setContent(editorRef.current.getInstance().getHtml().outerHTML);
     const content = editorRef.current.getInstance().getMarkdown().toString();
     let questionsRef = await db.collection('questions');
-    let date = new Date();
     let now = fire.firestore.Timestamp.fromDate(new Date());
 
     let setToDB = await questionsRef.doc(uid20).set({

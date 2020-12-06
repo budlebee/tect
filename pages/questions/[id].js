@@ -186,7 +186,7 @@ const Question = (props) => {
                           style={{ fontWeight: 'bold', fontSize: '20px' }}
                         ></span>
                       }
-                      title={answer.authorNickname}
+                      //title={answer.authorNickname}
                       description={
                         <div
                           style={{ marginBottom: '10px', marginTop: '-5px' }}

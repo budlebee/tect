@@ -184,16 +184,6 @@ export async function getServerSideProps() {
     const question = { id: doc.id, ...docData };
     return question;
   });
-  /*.then(async (snapshot) => {
-      questions = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-    })
-    .catch((err) => {
-      console.log('Error getting documents', err);
-    });
-*/
   return {
     props: { questions },
   };
