@@ -89,17 +89,20 @@ export default function Main() {
             </List.Item>
           )}
         ></List>
-
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: 12,
-            height: 32,
-            lineHeight: '32px',
-          }}
-        >
-          <Button onClick={updateArticles}>loading more</Button>
-        </div>
+        {articles.length > 7 ? (
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: 12,
+              height: 32,
+              lineHeight: '32px',
+            }}
+          >
+            <Button onClick={updateArticles}>loading more</Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );

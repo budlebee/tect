@@ -4,7 +4,7 @@ import { Editor } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
 import fire, { db } from '../firebaseConfig';
 import { uid } from 'uid';
-import { Input, Button } from 'antd';
+import { Input, Button, Spin } from 'antd';
 
 //const { codeSyntaxHighlight } = Editor.plugin;
 export default function ToastEditor() {
@@ -107,7 +107,9 @@ export default function ToastEditor() {
           style={{ width: 300 }}
         />
       </div>
-      <Button onClick={onClickSubmit}>질문하기!</Button>
+      <Spin spinning={isLoading} delay={500} tip="Loading...">
+        <Button onClick={onClickSubmit}>질문 남기기</Button>
+      </Spin>
     </>
   );
 }

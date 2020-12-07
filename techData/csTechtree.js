@@ -3,157 +3,182 @@ const csData = [
     data: {
       id: '선형대수',
       label: 'Linear Algebra',
+      url: '/subjects/linear-algebra',
     },
   },
   {
     data: {
       id: '공학수학',
       label: 'Math Fundamentals',
+      url: '/subjects/vector-calculus',
     },
   },
   {
     data: {
       id: '확률과통계',
       label: 'Probability and Statistics',
+      url: '/subjects/probability-and-statistics',
     },
   },
   {
     data: {
       id: '컴퓨터그래픽스',
       label: 'Computer Graphics',
+      url: '/subjects/computer-graphics',
     },
   },
   {
     data: {
       id: '이산수학',
       label: 'Discrete Math',
+      url: '/subjects/discrete-mathematics',
     },
   },
   {
     data: {
       id: '자료구조',
       label: 'Data Structure',
-      url: '/subjects/datastructure',
+      url: '/subjects/data-structure',
     },
   },
   {
     data: {
       id: '객체지향프로그래밍',
       label: 'OOP',
+      url: '/subjects/oop',
     },
   },
   {
     data: {
       id: '컴퓨터프로그래밍',
       label: '컴퓨터프로그래밍',
+      url: '/subjects/introduction-to-cs',
     },
   },
   {
     data: {
       id: '프로그래밍언어구조론',
       label: '프로그래밍언어구조론',
+      url: '/subjects/programming-language-structure',
     },
   },
   {
     data: {
       id: '컴파일러',
       label: 'Compliler',
+      url: '/subjects/compliler',
     },
   },
   {
     data: {
       id: '오토마타',
       label: 'Automata',
+      url: '/subjects/automata-theory',
     },
   },
   {
     data: {
       id: '논리회로설계',
       label: '논리회로설계',
+      url: '/subjects/logic-circuit-design',
     },
   },
   {
     data: {
       id: '알고리즘',
       label: 'Algorithm',
+      url: '/subjects/algorithm',
     },
   },
   {
     data: {
       id: 'HCI',
       label: 'HCI',
+      url: '/subjects/hci',
     },
   },
   {
     data: {
       id: '인공지능',
       label: 'AI',
+      url: '/subjects/artificial-intelligence',
     },
   },
   {
     data: {
       id: '머신러닝',
       label: 'Machine Learning',
+      url: '/subjects/machine-learning',
     },
   },
   {
     data: {
       id: '데이터마이닝',
       label: 'Data Mining',
+      url: '/subjects/data-mining',
     },
   },
   {
     data: {
       id: '데이터베이스',
       label: 'DB',
+      url: '/subjects/database',
     },
   },
   {
     data: {
       id: '컴퓨터네트워크',
       label: 'Network',
+      url: '/subjects/network',
     },
   },
   {
     data: {
       id: '인터넷프로그래밍',
       label: '인터넷프로그래밍',
+      url: '/subjects/internet-programming',
     },
   },
   {
     data: {
       id: '정보보호',
       label: '정보보호',
+      url: '/subjects/information-security',
     },
   },
   {
     data: {
       id: '컴퓨터시스템',
       label: '컴퓨터시스템',
+      url: '/subjects/system-programming',
     },
   },
   {
     data: {
       id: '컴퓨터아키텍쳐',
       label: 'Architecture',
+      url: '/subjects/computer-architecture',
     },
   },
   {
     data: {
       id: '운영체제',
       label: 'OS',
+      url: '/subjects/operating-system',
     },
   },
   {
     data: {
       id: '시스템프로그래밍',
       label: '시스템프로그래밍',
+      url: '/subjects/system-programming',
     },
   },
   {
     data: {
       id: '멀티코어',
       label: '멀티코어',
+      url: '/subjects/multicore-programming',
     },
   },
 
@@ -161,6 +186,7 @@ const csData = [
     data: {
       id: '컴퓨터비전',
       label: 'Computer Vision',
+      url: '/subjects/computer-vision',
     },
   },
   {

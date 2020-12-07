@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { Button, List } from 'antd';
 import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Subject.module.css';
@@ -15,8 +15,9 @@ const Subject = (props) => {
   );
 
   const [startDocId, setStartDocId] = useState();
-  const [subjectInfo, setSubjectInfo] = useState({ name: '' });
+  const [subjectInfo, setSubjectInfo] = useState({ name: props.subjectID });
   const [posts, setPosts] = useState([]);
+  const [isPosting, setIsPosting] = useState(false);
 
   async function updateArticles() {
     try {
@@ -81,21 +82,44 @@ const Subject = (props) => {
     <>
       <div className="mainContainer">
         <h2>{subjectInfo.name}</h2>
-        <div>
-          {posts.map((post) => {
-            return (
-              <div key={post.id}>
-                <div className="contentBlock">
-                  <ToastViewer initialValue={post.content} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <br />
+        {!isPosting ? (
+          <Button
+            onClick={() => {
+              setIsPosting(true);
+            }}
+          >
+            {subjectInfo.name} 공부와 관련된 정보 남기기
+          </Button>
+        ) : (
+          ''
+        )}
 
-        <h3>{subjectInfo.name}와 관련된 유용한 정보 남기기</h3>
-        <SubjectToastEditor subjectID={props.subjectID} />
+        {isPosting ? <SubjectToastEditor subjectID={props.subjectID} /> : ''}
+
+        <List
+          key="List"
+          style={{ minHeight: '350px' }}
+          dataSource={posts}
+          renderItem={(element) => (
+            <List.Item key={element.id} style={{ width: '80%' }}>
+              <ToastViewer initialValue={element.content} />
+            </List.Item>
+          )}
+        ></List>
+        {posts.length > 7 ? (
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: 12,
+              height: 32,
+              lineHeight: '32px',
+            }}
+          >
+            <Button onClick={updateArticles}>loading more</Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );

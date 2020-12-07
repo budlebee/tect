@@ -3,138 +3,161 @@ const mathData = [
     data: {
       id: 'vectorCalculus',
       label: 'Vector Calculus',
+      url: '/subjects/vector-calculus',
     },
   },
   {
     data: {
       id: 'linearAlgebra',
       label: 'Linear Algebra',
+      url: '/subjects/linear-algebra',
     },
   },
   {
     data: {
       id: 'numberTheory',
       label: 'Number Theory',
+      url: '/subjects/number-theory',
     },
   },
   {
     data: {
       id: 'setTheory',
       label: 'Set Theory',
+      url: '/subjects/set-theory',
     },
   },
   {
     data: {
       id: 'analysis',
       label: 'Analysis',
+      url: '/subjects/analysis',
     },
   },
   {
     data: {
       id: 'discreteMathematics',
       label: 'Discrete Mathematics',
+      url: '/subjects/discrete-mathematics',
     },
   },
   {
     data: {
       id: 'ode',
       label: 'ODE',
+      url: '/subjects/differential-equation',
     },
   },
   {
     data: {
       id: 'pde',
       label: 'PDE',
+      url: '/subjects/differential-equation',
     },
   },
   {
     data: {
       id: 'probability',
       label: 'Probability',
+      url: '/subjects/probability',
     },
   },
   {
     data: {
       id: 'differentialGeometry',
       label: 'Differential Geometry',
+      url: '/subjects/differential-geometry',
     },
   },
   {
     data: {
       id: 'modernAlgebra',
       label: 'Modern Algebra',
+      url: '/subjects/modern-algebra',
     },
   },
   {
     data: {
       id: 'numericalAnalysis',
       label: 'Numerical Analysis',
+      url: '/subjects/numerical-analysis',
     },
   },
   {
     data: {
       id: 'topology',
       label: 'Topology',
+      url: '/subjects/topology',
     },
   },
   {
     data: {
       id: 'fieldTheory',
       label: 'Field Theory',
+      url: '/subjects/field-theory',
     },
   },
   {
     data: {
       id: 'financialMathematics',
       label: 'Financial Mathematics',
+      url: '/subjects/financial-mathematics',
     },
   },
   {
     data: {
       id: 'algebraicGeometry',
       label: 'Algebraic Geometry',
+      url: '/subjects/algebraic-geometry',
     },
   },
   {
     data: {
       id: 'fourierAnalysis',
       label: 'Fourier Analysis',
+      url: '/subjects/fourier-analysis',
     },
   },
   {
     data: {
       id: 'statistics',
       label: 'Statistics',
+      url: '/subjects/statistics',
     },
   },
   {
     data: {
       id: 'complexAnalysis',
       label: 'Complex Analysis',
+      url: '/subjects/complex-analysis',
     },
   },
   {
     data: {
       id: 'mathematicalLogic',
       label: 'Mathematical Logic',
+      url: '/subjects/mathematical-logic',
     },
   },
   {
     data: {
       id: 'combinatorics',
       label: 'Combinatorics',
+      url: '/subjects/combinatorics',
     },
   },
   {
     data: {
       id: 'appliedAlgebra',
       label: 'Applied Algebra',
+      url: '/subjects/applied-algebra',
     },
   },
   {
     data: {
       id: 'probabilityAndRandomProcesses',
       label: 'Random Processes',
+      url: '/subjects/random-processes',
     },
   },
   {

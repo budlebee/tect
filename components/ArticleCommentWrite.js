@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import firebase from 'firebase/app';
 import { db } from '../firebaseConfig';
 
-import { Form, Input, Comment, Button } from 'antd';
+import { Form, Input, Comment, Button, Spin } from 'antd';
 const { TextArea } = Input;
 
 const QuestionCommentWrite = (props) => {
@@ -48,15 +48,17 @@ const QuestionCommentWrite = (props) => {
             />
           </Form.Item>
           <Form.Item key={'Formitem_2'}>
-            <Button
-              id="addCommentBtn"
-              key={'submitCommentButton'}
-              loading={submitting}
-              onClick={onClickContent}
-              type="default"
-            >
-              댓글 작성
-            </Button>
+            <Spin spinning={isLoading} delay={500} tip="Loading...">
+              <Button
+                id="addCommentBtn"
+                key={'submitCommentButton'}
+                loading={submitting}
+                onClick={onClickContent}
+                type="default"
+              >
+                댓글 작성
+              </Button>
+            </Spin>
           </Form.Item>
         </>
       }

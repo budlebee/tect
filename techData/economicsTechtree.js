@@ -45,6 +45,7 @@ const economyData = [
     data: {
       id: '선형대수',
       label: '선형대수',
+      url: '/subjects/linear-algebra',
     },
   },
   {

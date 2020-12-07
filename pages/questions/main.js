@@ -164,16 +164,20 @@ export default function Main(props) {
           )}
         ></List>
 
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: 12,
-            height: 32,
-            lineHeight: '32px',
-          }}
-        >
-          <Button onClick={updateQuestions}>loading more</Button>
-        </div>
+        {questions.length > 7 ? (
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: 12,
+              height: 32,
+              lineHeight: '32px',
+            }}
+          >
+            <Button onClick={updateQuestions}>loading more</Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );

@@ -3,60 +3,70 @@ const chemData = [
     data: {
       id: '일반화학',
       label: '일반화학',
+      url: '/subjects/general-chemistry',
     },
   },
   {
     data: {
       id: '일반생물학',
       label: '일반생물학',
+      url: '/subjects/general-biology',
     },
   },
   {
     data: {
       id: '생화학',
       label: '생화학',
+      url: '/subjects/biochemistry',
     },
   },
   {
     data: {
       id: '유기화학',
       label: '유기화학',
+      url: '/subjects/organic-chemistry',
     },
   },
   {
     data: {
       id: '무기화학',
       label: '무기화학',
+      url: '/subjects/inorganic-chemistry',
     },
   },
   {
     data: {
       id: '물리화학',
       label: '물리화학',
+      url: '/subjects/physical-chemistry',
     },
   },
   {
     data: {
       id: '분석화학',
       label: '분석화학',
+      url: '/subjects/analytical-chemistry',
     },
   },
   {
     data: {
       id: '기기분석',
       label: '기기분석',
+      url: '/subjects/instrumental-analysis',
     },
   },
   {
     data: {
       id: '분자분광학및동역학',
       label: '분자분광학및동역학',
+      url: '/subjects/mocular-spectroscopy',
     },
   },
   {
     data: {
       id: '양자화학',
       label: '양자화학',
+      url: '/subjects/quantum-chemistry',
     },
   },
   {

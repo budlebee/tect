@@ -3,7 +3,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
 import fire, { db } from '../firebaseConfig';
-import { uid } from 'uid';
+import { Button, Spin } from 'antd';
 
 //const { codeSyntaxHighlight } = Editor.plugin;
 export default function ToastEditor(props) {
@@ -53,8 +53,9 @@ export default function ToastEditor(props) {
           'image',
         ]}
       />
-
-      <button onClick={onClickSubmit}>수정 완료</button>
+      <Spin spinning={isLoading} delay={500} tip="Loading...">
+        <Button onClick={onClickSubmit}>수정 완료</Button>
+      </Spin>
     </>
   );
 }

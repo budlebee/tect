@@ -11,6 +11,7 @@ const electricalEngineeringData = [
       id: 'electroDynamics',
 
       label: '전자기학',
+      url: '/subjects/electrodynamics',
     },
   },
   {
@@ -25,6 +26,7 @@ const electricalEngineeringData = [
       id: '기초회로이론',
 
       label: '기초회로이론',
+      url: '/subjects/circuit-fundamentals',
     },
   },
   {
@@ -39,6 +41,7 @@ const electricalEngineeringData = [
       id: '자료구조',
 
       label: '자료구조',
+      url: '/subjects/data-structure',
     },
   },
   {
@@ -53,6 +56,7 @@ const electricalEngineeringData = [
       id: '운영체제',
 
       label: '운영체제',
+      url: '/subjects/operating-system',
     },
   },
   {
@@ -102,6 +106,7 @@ const electricalEngineeringData = [
       id: '기초인공지능',
 
       label: '기초인공지능',
+      url: '/subjects/artificial-intelligence',
     },
   },
   {

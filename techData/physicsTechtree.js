@@ -3,60 +3,70 @@ const physicsData = [
     data: {
       id: 'vectorCalculus',
       label: '벡터미적분학',
+      url: '/subjects/vector-calculus',
     },
   },
   {
     data: {
       id: 'linear-algebra',
       label: '선형대수',
+      url: '/subjects/linear-algebra',
     },
   },
   {
     data: {
       id: 'diffrential-equation',
       label: '미분방정식',
+      url: '/subjects/differential-equation',
     },
   },
   {
     data: {
       id: 'relativity',
       label: '상대성이론',
+      url: '/subjects/relativity',
     },
   },
   {
     data: {
       id: 'groupTheory',
       label: '군론',
+      url: '/subjects/group-theory',
     },
   },
   {
     data: {
       id: 'nuclearPhysics',
       label: '핵물리학',
+      url: '/subjects/nuclear-physics',
     },
   },
   {
     data: {
       id: 'optics',
       label: '광학',
+      url: '/subjects/optics',
     },
   },
   {
     data: {
       id: 'solidStatePhysics',
       label: '고체물리학',
+      url: '/subjects/solid-state-physics',
     },
   },
   {
     data: {
       id: 'classicalMechanics',
       label: '고전역학',
+      url: '/subjects/classical-mechanics',
     },
   },
   {
     data: {
       id: 'electroDynamics',
       label: '전자기학',
+      url: '/subjects/electrodynamics',
     },
   },
   {
@@ -70,30 +80,35 @@ const physicsData = [
     data: {
       id: 'thermalPhysics',
       label: '열물리',
+      url: '/subjects/thermal-physics',
     },
   },
   {
     data: {
       id: 'statisticalPhysics',
       label: '통계물리',
+      url: '/subjects/statistical-physics',
     },
   },
   {
     data: {
       id: 'modernPhysics',
       label: '현대물리',
+      url: '/subjects/modern-physics',
     },
   },
   {
     data: {
       id: 'circuit',
       label: '회로이론',
+      url: '/subjects/circuit-fundamentals',
     },
   },
   {
     data: {
       id: '입자물리',
       label: '입자물리',
+      url: '/subjects/particle-physics',
     },
   },
   {
