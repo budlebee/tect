@@ -1,15 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
-import { Button, List, Typography, Card, Pagination, Input } from 'antd';
-import Item from 'antd/lib/list/Item';
-import { urlObjectKeys } from 'next/dist/next-server/lib/utils';
+import { Button, List, Input } from 'antd';
+import axios from 'axios';
+import path from 'path';
 
 const { Search } = Input;
-const { Paragraph } = Typography;
-const { Meta } = Card;
 
 const getObjectLength = (parent) => {
   if (!parent) {
@@ -23,9 +20,9 @@ const getObjectLength = (parent) => {
 };
 
 export default function Main(props) {
-  console.log('렌더링');
-  const [questions, setQuestions] = useState(props.questions);
-  const [startDocId, setStartDocId] = useState(props.questions[0].id);
+  //console.log('렌더링');
+  const [questions, setQuestions] = useState([]);
+  const [startDocId, setStartDocId] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
   async function updateQuestions() {
@@ -83,7 +80,20 @@ export default function Main(props) {
     }
   }
 
-  useEffect(() => {}, []);
+  useEffect(async () => {
+    const questionsRef = db
+      .collection('questions')
+      .orderBy('createdAt', 'desc')
+      .limit(7)
+      .get();
+    const tempQuestions = (await questionsRef).docs.map((doc) => {
+      const docData = JSON.parse(JSON.stringify(doc.data()));
+      const question = { id: doc.id, ...docData };
+      return question;
+    });
+    setQuestions(tempQuestions);
+    setStartDocId(tempQuestions[0].id);
+  }, []);
   return (
     <>
       <div className="mainContainer">
@@ -167,20 +177,4 @@ export default function Main(props) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const questionsRef = db
-    .collection('questions')
-    .orderBy('createdAt', 'desc')
-    .limit(7)
-    .get();
-  const questions = (await questionsRef).docs.map((doc) => {
-    const docData = JSON.parse(JSON.stringify(doc.data()));
-    const question = { id: doc.id, ...docData };
-    return question;
-  });
-  return {
-    props: { questions },
-  };
 }

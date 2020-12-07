@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
 import {
@@ -56,8 +57,20 @@ const Question = (props) => {
   const [tempPassword, setTempPassword] = useState();
   const [isTryingEdit, setIsTryingEdit] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(props.question.answers.length);
 
+  const [question, setQuestion] = useState({
+    title: '',
+    content: '',
+    subject: '',
+    createdAt: { seconds: '' },
+    authorNickname: '',
+    authorTempPassword: '',
+    authorUID: '',
+    answers: [],
+    comments: [],
+    lastUpdate: { seconds: '' },
+  });
+  const [isAnswered, setIsAnswered] = useState(1);
   const ToastViewer = dynamic(() => import('../../components/ToastViewer'), {
     ssr: false,
   });
@@ -76,7 +89,18 @@ const Question = (props) => {
     setTempPassword(e.target.value);
   }
 
-  useEffect(() => {}, []);
+  useEffect(async () => {
+    await db
+      .collection('questions')
+      .doc(props.questionID)
+      .get()
+      .then((doc) => {
+        const docData = JSON.parse(JSON.stringify(doc.data()));
+        const tempQuestion = { id: doc.id, ...docData };
+        setQuestion(tempQuestion);
+        setIsAnswered(tempQuestion.answers.length);
+      });
+  }, []);
   return (
     <>
       <div className="mainContainer">
@@ -84,26 +108,22 @@ const Question = (props) => {
           style={{ marginTop: 16 }}
           actions={[
             <div style={{ float: 'left', paddingLeft: '15px' }}>
-              답변 {getObjectLength(props.question.answers)}개, 댓글{' '}
-              {getObjectLength(props.question.comments)}개
+              답변 {getObjectLength(question.answers)}개, 댓글{' '}
+              {getObjectLength(question.comments)}개
             </div>,
           ]}
-          title={`Q. ${props.question.title}`}
+          title={`Q. ${question.title}`}
         >
           <Meta
             avatar={
               <span style={{ fontWeight: 'bold', fontSize: '20px' }}></span>
             }
-            title={props.question.authorNickname}
+            title={question.authorNickname}
             description={
               <div style={{ marginBottom: '10px', marginTop: '-5px' }}>
-                <div>
-                  created at {getDate(props.question.createdAt.seconds)}
-                </div>
-                {props.question.lastUpdate ? (
-                  <div>
-                    updated at {getDate(props.question.lastUpdate.seconds)}
-                  </div>
+                <div>created at {getDate(question.createdAt.seconds)}</div>
+                {question.lastUpdate ? (
+                  <div>updated at {getDate(question.lastUpdate.seconds)}</div>
                 ) : (
                   ''
                 )}
@@ -113,11 +133,11 @@ const Question = (props) => {
           />
           {isAuth ? (
             <QuestionEditToastEditor
-              question={props.question}
+              question={question}
               questionID={props.questionID}
             />
           ) : (
-            <ToastViewer initialValue={props.question.content} />
+            <ToastViewer initialValue={question.content} />
           )}
           {!isTryingEdit && !isAuth && isAnswered == 0 ? (
             <div>
@@ -140,7 +160,7 @@ const Question = (props) => {
               ></input>
               <button
                 onClick={() => {
-                  if (tempPassword == props.question.authorTempPassword) {
+                  if (tempPassword == question.authorTempPassword) {
                     setIsAuth(true);
                   } else {
                     alert('비밀번호가 다릅니다.');
@@ -155,8 +175,8 @@ const Question = (props) => {
           )}
         </Card>
 
-        {props.question.comments &&
-          props.question.comments.map((comment) => {
+        {question.comments &&
+          question.comments.map((comment) => {
             return (
               <div key={comment.id}>
                 <Comment
@@ -174,16 +194,16 @@ const Question = (props) => {
 
         <QuestionCommentWrite
           questionID={props.questionID}
-          comments={props.question.comments}
+          comments={question.comments}
         />
 
         <div>
           <br />
           <Title level={2} style={{ marginTop: '10px', marginLeft: '15px' }}>
-            {getObjectLength(props.question.answers)} Answers
+            {getObjectLength(question.answers)} Answers
           </Title>
-          {props.question.answers &&
-            props.question.answers.map((answer) => {
+          {question.answers &&
+            question.answers.map((answer) => {
               return (
                 <div key={answer.id}>
                   <Card
@@ -214,9 +234,6 @@ const Question = (props) => {
                     <ToastViewer initialValue={answer.content} />
                   </Card>
                 </div>
-                // <div key={answer.id} className="answerBlock">
-                //   <ToastViewer initialValue={answer.content} />
-                // </div>
               );
             })}
         </div>
@@ -227,7 +244,7 @@ const Question = (props) => {
           </Title>
           <AnswerToastEditor
             questionID={props.questionID}
-            answers={props.question.answers}
+            answers={question.answers}
           />
         </div>
       </div>
@@ -237,23 +254,9 @@ const Question = (props) => {
 
 export async function getServerSideProps(ctx) {
   try {
-    // Get a reference to the database service
-
-    let question = {};
-
-    await db
-      .collection('questions')
-      .doc(ctx.query.id)
-      .get()
-      .then((doc) => {
-        const docData = JSON.parse(JSON.stringify(doc.data()));
-        question = { id: doc.id, ...docData };
-      });
-
     return {
       props: {
         questionID: ctx.query.id,
-        question: question,
       },
     };
   } catch (err) {

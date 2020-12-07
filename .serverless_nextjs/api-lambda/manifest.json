@@ -1,1 +1,1 @@
-{"apis":{"dynamic":{},"nonDynamic":{"/api/hello":"pages/api/hello.js"}},"domainRedirects":{},"enableHTTPCompression":false}
+{"apis":{"dynamic":{},"nonDynamic":{"/api/articles/main":"pages/api/articles/main.js","/api/hello":"pages/api/hello.js","/api/questions/main":"pages/api/questions/main.js"}},"domainRedirects":{},"enableHTTPCompression":false}

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
 import { Button, List } from 'antd';
+const fetch = require('node-fetch');
 
 const getObjectLength = (parent) => {
   if (!parent) {
@@ -16,10 +17,10 @@ const getObjectLength = (parent) => {
   return count;
 };
 
-export default function Main(props) {
+export default function Main() {
   console.log('렌더링');
-  const [articles, setArticles] = useState(props.articles);
-  const [startDocId, setStartDocId] = useState(props.articles[0].id);
+  const [articles, setArticles] = useState([]);
+  const [startDocId, setStartDocId] = useState();
 
   async function updateArticles() {
     try {
@@ -47,6 +48,27 @@ export default function Main(props) {
       return;
     }
   }
+
+  useEffect(async () => {
+    try {
+      const articlesRef = db
+        .collection('articles')
+        .orderBy('createdAt', 'desc')
+        .limit(7)
+        .get();
+      const tempArticles = (await articlesRef).docs.map((doc) => {
+        const docData = JSON.parse(JSON.stringify(doc.data()));
+        const article = { id: doc.id, ...docData };
+        return article;
+      });
+      setArticles(tempArticles);
+      setStartDocId(tempArticles[0].id);
+    } catch (err) {
+      alert('오류가 발생해 메인페이지로 이동합니다.');
+      window.location.href = '/';
+      return;
+    }
+  }, []);
 
   return (
     <>
@@ -82,27 +104,4 @@ export default function Main(props) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  try {
-    const articlesRef = db
-      .collection('articles')
-      .orderBy('createdAt', 'desc')
-      .limit(7)
-      .get();
-    const articles = (await articlesRef).docs.map((doc) => {
-      const docData = JSON.parse(JSON.stringify(doc.data()));
-      const article = { id: doc.id, ...docData };
-      return article;
-    });
-
-    return {
-      props: { articles },
-    };
-  } catch (err) {
-    alert('오류가 발생해 메인페이지로 이동합니다.');
-    window.location.href = '/';
-    return;
-  }
 }

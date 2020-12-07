@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
@@ -34,6 +34,35 @@ const getDate = (timestamp) => {
 };
 
 const Article = (props) => {
+  const [article, setArticle] = useState({
+    title: '',
+    content: '',
+    subject: '',
+    createdAt: { seconds: '' },
+    authorNickname: '',
+    authorUID: '',
+    comments: [],
+    lastUpdate: { seconds: '' },
+  });
+
+  useEffect(async () => {
+    try {
+      await db
+        .collection('articles')
+        .doc(props.articleID)
+        .get()
+        .then((doc) => {
+          const docData = JSON.parse(JSON.stringify(doc.data()));
+          setArticle({ id: doc.id, ...docData });
+        });
+    } catch (err) {
+      console.log('error: ', err);
+      return {
+        props: {},
+      };
+    }
+  }, []);
+
   return (
     <>
       <div className="mainContainer">
@@ -41,10 +70,10 @@ const Article = (props) => {
           style={{ marginTop: 16 }}
           actions={[
             <div style={{ float: 'left', paddingLeft: '15px' }}>
-              댓글 {getObjectLength(props.article.comments)}개
+              댓글 {getObjectLength(article.comments)}개
             </div>,
           ]}
-          title={`${props.article.title}`}
+          title={`${article.title}`}
         >
           <Meta
             avatar={
@@ -52,22 +81,24 @@ const Article = (props) => {
             }
             description={
               <div style={{ marginBottom: '10px', marginTop: '-5px' }}>
-                <div>created at {getDate(props.article.createdAt.seconds)}</div>
-                {props.article.lastUpdate ? (
-                  <div>
-                    updated at {getDate(props.article.lastUpdate.seconds)}
-                  </div>
+                <div>created at {getDate(article.createdAt.seconds)}</div>
+                {article.lastUpdate ? (
+                  <div>updated at {getDate(article.lastUpdate.seconds)}</div>
                 ) : (
                   ''
                 )}
               </div>
             }
           />
-          <ToastViewer initialValue={props.article.content} />
+          {article.content != '' ? (
+            <ToastViewer initialValue={article.content} />
+          ) : (
+            ''
+          )}
         </Card>
 
-        {props.article.comments &&
-          props.article.comments.map((comment) => {
+        {article.comments &&
+          article.comments.map((comment) => {
             return (
               <div key={comment.id}>
                 <Comment
@@ -82,7 +113,7 @@ const Article = (props) => {
           })}
         <ArticleCommentWrite
           articleID={props.articleID}
-          comments={props.article.comments}
+          comments={article.comments}
         />
       </div>
     </>
@@ -91,21 +122,9 @@ const Article = (props) => {
 
 export async function getServerSideProps(ctx) {
   try {
-    let article = {};
-
-    await db
-      .collection('articles')
-      .doc(ctx.query.id)
-      .get()
-      .then((doc) => {
-        const docData = JSON.parse(JSON.stringify(doc.data()));
-        article = { id: doc.id, ...docData };
-      });
-
     return {
       props: {
         articleID: ctx.query.id,
-        article: article,
       },
     };
   } catch (err) {
