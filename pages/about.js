@@ -8,15 +8,3 @@ export default function About(props) {
     </>
   );
 }
-/*
-export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/hello');
-  const data = await res.json();
-  console.log('data is, ', data);
-  return {
-    props: {
-      data,
-    },
-  };
-}
-*/

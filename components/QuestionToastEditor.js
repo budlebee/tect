@@ -58,7 +58,6 @@ export default function ToastEditor() {
         onChange={onChangeTitle}
         placeholder={'질문을 한줄로 요약해 주세요'}
         required={true}
-        style={{ width: 500 }}
       />
 
       <Editor

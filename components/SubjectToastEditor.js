@@ -8,13 +8,11 @@ import { db } from '../firebaseConfig';
 
 // props 로 해당하는 subject 주소 받을것.
 export default function ToastEditor(props) {
-  const [content, setContent] = useState();
   const editorRef = useRef();
 
   async function onClickContent() {
-    setContent(editorRef.current.getInstance().getMarkdown());
+    const content = editorRef.current.getInstance().getHtml().toString();
 
-    // 글 추가하기 기능 완성해야함
     const subjectDoc = db.collection('subjects').doc(props.subjectID);
 
     const subjectPosts = subjectDoc.collection('posts');
