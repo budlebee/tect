@@ -1,7 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import { GA_TRACKING_ID } from '../lib/gtag';
-
 export default class MyDocument extends Document {
   render() {
     return (
@@ -9,7 +7,7 @@ export default class MyDocument extends Document {
         <Head>
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-9D0537PYLF"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NETX_PUBLIC_G_ID}`}
           />
 
           <script
@@ -18,7 +16,7 @@ export default class MyDocument extends Document {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-9D0537PYLF');
+            gtag('config', ${process.env.NETX_PUBLIC_G_ID});
         `,
             }}
           />
