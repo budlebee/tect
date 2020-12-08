@@ -1,21 +1,27 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Router from 'next/router';
 import '../styles/globals.css';
 import '../styles/antd.less';
 
-import { Menu, Typography, Layout, PageHeader } from 'antd';
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { Menu, PageHeader } from 'antd';
+import { useRouter } from 'next/router';
 
-// const { SubMenu } = Menu;
-const { Title } = Typography;
-const { Header, Content, Footer } = Layout;
+import * as gtag from '../lib/gtag';
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
       <Head>
