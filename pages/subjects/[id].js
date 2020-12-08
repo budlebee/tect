@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, List } from 'antd';
+import { Button, List, Spin } from 'antd';
 import dynamic from 'next/dynamic';
 import { db } from '../../firebaseConfig';
 import '../../styles/Subject.module.css';
@@ -18,6 +18,7 @@ const Subject = (props) => {
   const [subjectInfo, setSubjectInfo] = useState({ name: props.subjectID });
   const [posts, setPosts] = useState([]);
   const [isPosting, setIsPosting] = useState(false);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
 
   async function updateArticles() {
     try {
@@ -53,6 +54,7 @@ const Subject = (props) => {
   }
 
   useEffect(async () => {
+    setIsLoadingPosts(true);
     try {
       const subjectDoc = db.collection('subjects').doc(props.subjectID);
 
@@ -67,6 +69,7 @@ const Subject = (props) => {
         const post = { id: doc.id, ...docData };
         return post;
       });
+      setIsLoadingPosts(false);
       setPosts(tempPosts);
       setStartDocId(tempPosts[0].id);
       const getSubjectInfo = await subjectDoc.get().then((doc) => {
@@ -74,6 +77,7 @@ const Subject = (props) => {
         setSubjectInfo({ id: doc.id, ...docData });
       });
     } catch (err) {
+      setIsLoadingPosts(false);
       console.log('error: ', err);
     }
   }, []);
@@ -95,7 +99,9 @@ const Subject = (props) => {
         )}
 
         {isPosting ? <SubjectToastEditor subjectID={props.subjectID} /> : ''}
-
+        <div>
+          <Spin spinning={isLoadingPosts} delay={200}></Spin>
+        </div>
         <List
           key="List"
           style={{ minHeight: '350px' }}
@@ -106,7 +112,7 @@ const Subject = (props) => {
             </List.Item>
           )}
         ></List>
-        {posts.length > 7 ? (
+        {posts.length > 6 ? (
           <div
             style={{
               textAlign: 'center',

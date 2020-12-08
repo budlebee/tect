@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
-import { Button, List, Input } from 'antd';
+import { Button, List, Input, Spin } from 'antd';
 import axios from 'axios';
 import path from 'path';
 
@@ -24,6 +24,8 @@ export default function Main(props) {
   const [questions, setQuestions] = useState([]);
   const [startDocId, setStartDocId] = useState();
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
 
   async function updateQuestions() {
     try {
@@ -56,6 +58,7 @@ export default function Main(props) {
     if (!value) {
       return;
     }
+    setIsLoadingSearch(true);
     try {
       const searchRef = db
         .collection('questions')
@@ -70,8 +73,10 @@ export default function Main(props) {
       });
       if (tempSearchResults.length == 0) {
         alert('검색결과가 없습니다');
+        setIsLoadingSearch(false);
         return;
       }
+      setIsLoadingSearch(false);
       setSearchResults(tempSearchResults);
     } catch (err) {
       console.log('error: ', err);
@@ -81,29 +86,38 @@ export default function Main(props) {
   }
 
   useEffect(async () => {
-    const questionsRef = db
-      .collection('questions')
-      .orderBy('createdAt', 'desc')
-      .limit(7)
-      .get();
-    const tempQuestions = (await questionsRef).docs.map((doc) => {
-      const docData = JSON.parse(JSON.stringify(doc.data()));
-      const question = { id: doc.id, ...docData };
-      return question;
-    });
-    setQuestions(tempQuestions);
-    setStartDocId(tempQuestions[0].id);
+    setIsLoadingQuestions(true);
+    try {
+      const questionsRef = db
+        .collection('questions')
+        .orderBy('createdAt', 'desc')
+        .limit(7)
+        .get();
+      const tempQuestions = (await questionsRef).docs.map((doc) => {
+        const docData = JSON.parse(JSON.stringify(doc.data()));
+        const question = { id: doc.id, ...docData };
+        return question;
+      });
+      setIsLoadingQuestions(false);
+      setQuestions(tempQuestions);
+      setStartDocId(tempQuestions[0].id);
+    } catch (err) {
+      alert('글 목록을 불러오는데 오류가 발생했습니다');
+      return;
+    }
   }, []);
   return (
     <>
       <div className="mainContainer">
         <div>
-          <Search
-            placeholder="검색할 닉네임 입력"
-            allowClear
-            onSearch={onSearch}
-            style={{ width: 300, margin: '10px 0' }}
-          />
+          <Spin spinning={isLoadingSearch} delay={300}>
+            <Search
+              placeholder="검색할 닉네임 입력"
+              allowClear
+              onSearch={onSearch}
+              style={{ width: 300, margin: '10px 0' }}
+            />
+          </Spin>
         </div>
         {searchResults.length != 0 ? (
           <List
@@ -139,7 +153,9 @@ export default function Main(props) {
         <Button type="default" style={{ marginBottom: '15px' }}>
           <Link href="/questions/write">질문하기</Link>
         </Button>
-
+        <div>
+          <Spin spinning={isLoadingQuestions} delay={200}></Spin>
+        </div>
         <List
           key="List"
           style={{ minHeight: '350px' }}
@@ -164,7 +180,7 @@ export default function Main(props) {
           )}
         ></List>
 
-        {questions.length > 7 ? (
+        {questions.length > 6 ? (
           <div
             style={{
               textAlign: 'center',

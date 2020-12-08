@@ -13,24 +13,29 @@ const QuestionCommentWrite = (props) => {
     if (!content) {
       return;
     }
+
     // 아무 내용도 없으면 전송이 안 됨.
+    try {
+      let questionDoc = await db.collection('questions').doc(props.questionID);
+      let date = new Date();
+      let now = firebase.firestore.Timestamp.fromDate(new Date());
+      let commentsInfo = {
+        content: content,
+        createdAt: now,
+        author: {
+          nickname: '임시로 고정된 닉네임',
+          uid: '임시 user uid',
+        },
+      };
+      let setToAnswerInQuestion = await questionDoc.update({
+        comments: [...props.comments, commentsInfo],
+      });
 
-    let questionDoc = await db.collection('questions').doc(props.questionID);
-    let date = new Date();
-    let now = firebase.firestore.Timestamp.fromDate(new Date());
-    let commentsInfo = {
-      content: content,
-      createdAt: now,
-      author: {
-        nickname: '임시로 고정된 닉네임',
-        uid: '임시 user uid',
-      },
-    };
-    let setToAnswerInQuestion = await questionDoc.update({
-      comments: [...props.comments, commentsInfo],
-    });
-
-    window.location.href = `/questions/${props.questionID}`;
+      window.location.href = `/questions/${props.questionID}`;
+    } catch (err) {
+      alert('오류가 발생했습니다.');
+      return;
+    }
   }
 
   const onChange = (e) => {
@@ -52,17 +57,15 @@ const QuestionCommentWrite = (props) => {
             />
           </Form.Item>
           <Form.Item key={'Formitem_2'}>
-            <Spin spinning={isLoading} delay={500} tip="Loading...">
-              <Button
-                id="addCommentBtn"
-                key={'submitCommentButton'}
-                loading={submitting}
-                onClick={onClickContent}
-                type="default"
-              >
-                댓글 작성
-              </Button>
-            </Spin>
+            <Button
+              id="addCommentBtn"
+              key={'submitCommentButton'}
+              loading={submitting}
+              onClick={onClickContent}
+              type="default"
+            >
+              댓글 작성
+            </Button>
           </Form.Item>
         </>
       }

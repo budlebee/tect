@@ -12,6 +12,7 @@ export default function ToastEditor() {
   const [userID, setUserID] = useState();
   const [tempNickname, setTempNickname] = useState();
   const [tempPassword, setTempPassword] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   //const [content, setContent] = useState();
   const editorRef = useRef();
 
@@ -32,24 +33,32 @@ export default function ToastEditor() {
       alert('닉네임과 비밀번호를 설정해 주세요');
       return;
     }
-    const uid20 = uid(20);
-    const content = editorRef.current.getInstance().getMarkdown().toString();
-    let questionsRef = await db.collection('questions');
-    let now = fire.firestore.Timestamp.fromDate(new Date());
+    setIsLoading(true);
+    try {
+      const uid20 = uid(20);
+      const content = editorRef.current.getInstance().getMarkdown().toString();
+      let questionsRef = await db.collection('questions');
+      let now = fire.firestore.Timestamp.fromDate(new Date());
 
-    let setToDB = await questionsRef.doc(uid20).set({
-      title: title,
-      content: content,
-      subject: 'physics',
-      createdAt: now,
-      authorNickname: tempNickname,
-      authorTempPassword: tempPassword,
-      authorUID: uid20,
-      answers: [],
-      comments: [],
-      lastUpdate: null,
-    });
-    window.location.href = `/questions/${uid20}`;
+      let setToDB = await questionsRef.doc(uid20).set({
+        title: title,
+        content: content,
+        subject: 'physics',
+        createdAt: now,
+        authorNickname: tempNickname,
+        authorTempPassword: tempPassword,
+        authorUID: uid20,
+        answers: [],
+        comments: [],
+        lastUpdate: null,
+      });
+      setIsLoading(false);
+      window.location.href = `/questions/${uid20}`;
+    } catch (err) {
+      setIsLoading(false);
+      alert('오류가 발생했습니다.');
+      return;
+    }
   }
 
   return (
@@ -107,7 +116,7 @@ export default function ToastEditor() {
           style={{ width: 300 }}
         />
       </div>
-      <Spin spinning={isLoading} delay={500} tip="Loading...">
+      <Spin spinning={isLoading} delay={300} tip="Loading...">
         <Button onClick={onClickSubmit}>질문 남기기</Button>
       </Spin>
     </>

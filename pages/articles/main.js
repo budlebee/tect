@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { db } from '../../firebaseConfig';
 import '../../styles/Questions.module.css';
-import { Button, List } from 'antd';
+import { Button, List, Spin } from 'antd';
 const fetch = require('node-fetch');
 
 const getObjectLength = (parent) => {
@@ -17,7 +17,7 @@ const getObjectLength = (parent) => {
 };
 
 export default function Main() {
-  console.log('렌더링');
+  const [isLoadingArticles, setIsLoadingArticles] = useState(false);
   const [articles, setArticles] = useState([]);
   const [startDocId, setStartDocId] = useState();
 
@@ -49,6 +49,7 @@ export default function Main() {
   }
 
   useEffect(async () => {
+    setIsLoadingArticles(true);
     try {
       const articlesRef = db
         .collection('articles')
@@ -60,6 +61,7 @@ export default function Main() {
         const article = { id: doc.id, ...docData };
         return article;
       });
+      setIsLoadingArticles(false);
       setArticles(tempArticles);
       setStartDocId(tempArticles[0].id);
     } catch (err) {
@@ -72,6 +74,7 @@ export default function Main() {
   return (
     <>
       <div className="mainContainer">
+        <Spin spinning={isLoadingArticles} delay={200} tip="Loading..." />
         <List
           key="List"
           style={{ minHeight: '350px' }}
@@ -89,7 +92,7 @@ export default function Main() {
             </List.Item>
           )}
         ></List>
-        {articles.length > 7 ? (
+        {articles.length > 6 ? (
           <div
             style={{
               textAlign: 'center',

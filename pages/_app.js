@@ -27,15 +27,16 @@ const MyApp = ({ Component, pageProps }) => {
         ></meta>
         <meta
           name="description"
-          content="techtree of all knowledge, tect.dev"
+          content="모든 지식의 테크트리, tect.dev"
         ></meta>
         <meta property="og:type" content="website" />
         <meta property="og:title" content="tect.dev" />
         <meta
           property="og:description"
-          content="techtree of all knowledge, tect.dev"
+          content="모든 지식의 테크트리, tect.dev"
         />
         <meta property="og:url" content="https://tect.dev"></meta>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LeqB_4ZAAAAAOGF5bqPs8fRC9_7Zm9hPfGzIEz_"></script>
       </Head>
       <PageHeader
         title={
