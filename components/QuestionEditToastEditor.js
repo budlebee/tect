@@ -3,7 +3,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
 import fire, { db } from '../firebaseConfig';
-import { Button, Spin } from 'antd';
+import { Button, Spin, Input } from 'antd';
 
 //const { codeSyntaxHighlight } = Editor.plugin;
 export default function ToastEditor(props) {

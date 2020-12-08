@@ -141,24 +141,24 @@ const Question = (props) => {
           )}
           {!isTryingEdit && !isAuth && isAnswered == 0 ? (
             <div>
-              <button
+              <Button
                 onClick={() => {
                   setIsTryingEdit(true);
                 }}
               >
                 edit your question?
-              </button>
+              </Button>
             </div>
           ) : (
             ''
           )}
           {isTryingEdit && !isAuth ? (
             <div>
-              <input
+              <Input
                 placeholder={'작성시 입력한 비밀번호'}
                 onChange={onChangeTempPassword}
-              ></input>
-              <button
+              ></Input>
+              <Button
                 onClick={() => {
                   if (tempPassword == question.authorTempPassword) {
                     setIsAuth(true);
@@ -168,7 +168,7 @@ const Question = (props) => {
                 }}
               >
                 글 수정하기
-              </button>
+              </Button>
             </div>
           ) : (
             ''

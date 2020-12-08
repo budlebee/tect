@@ -3,16 +3,30 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import React, { useState, useRef } from 'react';
 import fire, { db } from '../firebaseConfig';
-import { Button, Spin } from 'antd';
+import { Button, Spin, Input } from 'antd';
 
 export default function AnswerToastEditor(props) {
   const [isLoading, setIsLoading] = useState(false);
   const editorRef = useRef();
+  const [botCheck, setBotCheck] = useState();
+  const [randomInt, setRandomInt] = useState(Math.floor(Math.random() * 5));
+
+  function onChangeBotCheck(e) {
+    e.preventDefault();
+    setBotCheck(e.target.value);
+  }
 
   async function onClickContent() {
+    if (botCheck != randomInt + 5) {
+      alert('자동입력 방지 숫자를 다시 입력해 주세요.');
+      return;
+    }
     setIsLoading(true);
     try {
       const content = editorRef.current.getInstance().getMarkdown().toString();
+      if (!content) {
+        return;
+      }
       let questionDoc = await db.collection('questions').doc(props.questionID);
       let answersCol = db.collection('answers');
       let now = fire.firestore.Timestamp.fromDate(new Date());
@@ -67,6 +81,21 @@ export default function AnswerToastEditor(props) {
           'image',
         ]}
       />
+
+      <div>
+        <div>
+          <img src="/images/dice-five.png" width="30px" height="30px" /> +
+          {randomInt} = ?
+        </div>
+        <Input
+          value={botCheck}
+          placeholder="Answer..."
+          onChange={onChangeBotCheck}
+          style={{ width: 100 }}
+        ></Input>
+      </div>
+      <br />
+
       <Spin spinning={isLoading} delay={500} tip="Loading...">
         <Button onClick={onClickContent}>답변하기</Button>
       </Spin>

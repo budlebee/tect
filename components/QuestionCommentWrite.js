@@ -8,9 +8,21 @@ const { TextArea } = Input;
 const QuestionCommentWrite = (props) => {
   const [content, setContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [botCheck, setBotCheck] = useState();
+  const [randomInt, setRandomInt] = useState(Math.floor(Math.random() * 5));
+
+  function onChangeBotCheck(e) {
+    e.preventDefault();
+    setBotCheck(e.target.value);
+  }
 
   async function onClickContent() {
     if (!content) {
+      return;
+    }
+
+    if (botCheck != randomInt + 5) {
+      alert('자동입력 방지 숫자를 다시 입력해 주세요.');
       return;
     }
 
@@ -23,7 +35,7 @@ const QuestionCommentWrite = (props) => {
         content: content,
         createdAt: now,
         author: {
-          nickname: '임시로 고정된 닉네임',
+          nickname: '임시 닉네임',
           uid: '임시 user uid',
         },
       };
@@ -57,6 +69,20 @@ const QuestionCommentWrite = (props) => {
             />
           </Form.Item>
           <Form.Item key={'Formitem_2'}>
+            <div>
+              <div>
+                <img src="/images/dice-five.png" width="30px" height="30px" /> +
+                {randomInt} = ?
+              </div>
+              <Input
+                value={botCheck}
+                placeholder="Answer..."
+                onChange={onChangeBotCheck}
+                style={{ width: 100 }}
+              ></Input>
+            </div>
+          </Form.Item>
+          <Form.Item key={'Formitem_3'}>
             <Button
               id="addCommentBtn"
               key={'submitCommentButton'}

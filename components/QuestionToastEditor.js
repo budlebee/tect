@@ -13,8 +13,14 @@ export default function ToastEditor() {
   const [tempNickname, setTempNickname] = useState();
   const [tempPassword, setTempPassword] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  //const [content, setContent] = useState();
   const editorRef = useRef();
+  const [botCheck, setBotCheck] = useState();
+  const [randomInt, setRandomInt] = useState(Math.floor(Math.random() * 5));
+
+  function onChangeBotCheck(e) {
+    e.preventDefault();
+    setBotCheck(e.target.value);
+  }
 
   function onChangeTempNickname(e) {
     setTempNickname(e.target.value);
@@ -31,6 +37,10 @@ export default function ToastEditor() {
   async function onClickSubmit() {
     if (!tempNickname || !tempPassword) {
       alert('닉네임과 비밀번호를 설정해 주세요');
+      return;
+    }
+    if (botCheck != randomInt + 5) {
+      alert('자동입력 방지 숫자를 다시 입력해 주세요.');
       return;
     }
     setIsLoading(true);
@@ -108,6 +118,7 @@ export default function ToastEditor() {
           style={{ width: 300 }}
         />
       </div>
+      <br />
       <div>
         <Input
           onChange={onChangeTempPassword}
@@ -116,6 +127,20 @@ export default function ToastEditor() {
           style={{ width: 300 }}
         />
       </div>
+      <br />
+      <div>
+        <div>
+          <img src="/images/dice-five.png" width="30px" height="30px" /> +
+          {randomInt} = ?
+        </div>
+        <Input
+          value={botCheck}
+          placeholder="Answer..."
+          onChange={onChangeBotCheck}
+          style={{ width: 100 }}
+        ></Input>
+      </div>
+      <br />
       <Spin spinning={isLoading} delay={300} tip="Loading...">
         <Button onClick={onClickSubmit}>질문 남기기</Button>
       </Spin>

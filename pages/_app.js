@@ -36,7 +36,7 @@ const MyApp = ({ Component, pageProps }) => {
           content="모든 지식의 테크트리, tect.dev"
         />
         <meta property="og:url" content="https://tect.dev"></meta>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LeqB_4ZAAAAAOGF5bqPs8fRC9_7Zm9hPfGzIEz_"></script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
       </Head>
       <PageHeader
         title={

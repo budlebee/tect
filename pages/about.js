@@ -1,5 +1,3 @@
-import { db } from '../firebaseConfig';
-import axios from 'axios';
 export default function About(props) {
   return (
     <>
@@ -12,13 +10,23 @@ export default function About(props) {
           좋습니다. 자유롭게 사용해 주세요.
         </div>
         <br />
+        <div>## Stack</div>
+        <div>* NextJS</div>
+        <div>* Firebase</div>
+        <div>* Serverless (AWS)</div>
+        <br />
         <div>## update 예정사항</div>
         <div>* Latex 문법 지원</div>
         <div>* elasticsearch 또는 algoilia 를 이용한 검색기능</div>
-        <div>* 클라이언트 사이드 렌더링 최적화</div>
+        <div>
+          * 클라이언트 사이드 렌더링 최적화(컴포넌트 리팩토링 및 csr로
+          리다이렉션 줄이기)
+        </div>
         <br />
-        <div>## 팀원도 구하고 있습니다. </div>
+        <div>## 버그리포트, 문의</div>
         <div>budlebeee@gmail.com</div>
+        <br />
+        <div>## 팀원도 구하고 있습니다</div>
       </div>
     </>
   );
